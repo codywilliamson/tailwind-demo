@@ -126,7 +126,7 @@ Setting up Tailwind in an Astro project is straightforward:
 
 4. **Add Tailwind directives** to your CSS file:
    ```css
-   /* src/styles/global.css */
+   /* src/styles/globals.css */
    @tailwind base;
    @tailwind components;
    @tailwind utilities;
@@ -135,7 +135,7 @@ Setting up Tailwind in an Astro project is straightforward:
 5. **Import the CSS** in your Astro files:
    ```astro
    ---
-   import "../styles/global.css";
+   import "../styles/globals.css";
    ---
    ```
 
