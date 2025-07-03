@@ -1,0 +1,39 @@
+---
+export interface Props {
+  variant?: 'success' | 'warning' | 'error' | 'info' | 'default';
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+}
+
+const { 
+  variant = 'default',
+  size = 'md',
+  class: className = '',
+  ...rest
+} = Astro.props;
+
+const variantClasses = {
+  success: 'badge-success',
+  warning: 'badge-warning',
+  error: 'badge-error',
+  info: 'badge-info',
+  default: 'badge bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400'
+};
+
+const sizeClasses = {
+  sm: 'px-2 py-0.5 text-xs',
+  md: 'px-2.5 py-0.5 text-xs',
+  lg: 'px-3 py-1 text-sm'
+};
+
+const classes = [
+  variantClasses[variant as keyof typeof variantClasses],
+  variant === 'default' ? '' : 'badge',
+  sizeClasses[size as keyof typeof sizeClasses],
+  className
+].filter(Boolean).join(' ').replace(/badge\s+badge/, 'badge');
+---
+
+<span class={classes} {...rest}>
+  <slot />
+</span>

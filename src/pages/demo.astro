@@ -1,0 +1,406 @@
+---
+import Layout from '../layouts/Layout.astro';
+import DashboardLayout from '../layouts/DashboardLayout.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import Badge from '../components/ui/Badge.astro';
+import Modal from '../components/ui/Modal.astro';
+import Input from '../components/forms/Input.astro';
+import CardSkeleton from '../components/skeletons/CardSkeleton.astro';
+import LoginForm from '../components/auth/LoginForm.astro';
+---
+
+<Layout>
+  <DashboardLayout>
+    <div class="container-padding">
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1 class="page-title">Component Library Demo</h1>
+        <p class="page-subtitle">Explore all available components and patterns</p>
+      </div>
+
+      <!-- Component Showcase -->
+      <div class="space-y-12">
+        
+        <!-- Buttons Section -->
+        <section>
+          <h2 class="text-xl font-semibold mb-6 text-gradient">Buttons</h2>
+          <div class="grid-responsive">
+            <Card>
+              <h3 class="font-medium mb-4">Button Variants</h3>
+              <div class="space-y-3">
+                <Button variant="primary">Primary Button</Button>
+                <Button variant="secondary">Secondary Button</Button>
+                <Button variant="danger">Danger Button</Button>
+                <Button variant="ghost">Ghost Button</Button>
+                <Button variant="link">Link Button</Button>
+              </div>
+            </Card>
+
+            <Card>
+              <h3 class="font-medium mb-4">Button Sizes</h3>
+              <div class="space-y-3">
+                <Button variant="primary" size="sm">Small</Button>
+                <Button variant="primary" size="md">Medium</Button>
+                <Button variant="primary" size="lg">Large</Button>
+                <Button variant="primary" size="xl">Extra Large</Button>
+              </div>
+            </Card>
+
+            <Card>
+              <h3 class="font-medium mb-4">Button States</h3>
+              <div class="space-y-3">
+                <Button variant="primary" loading>Loading...</Button>
+                <Button variant="primary" disabled>Disabled</Button>
+                <Button variant="primary" fullWidth>Full Width</Button>
+                <Button 
+                  variant="primary" 
+                  icon="<svg class='w-4 h-4' fill='currentColor' viewBox='0 0 20 20'><path d='M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z'/></svg>"
+                  iconPosition="left"
+                >
+                  With Icon
+                </Button>
+              </div>
+            </Card>
+          </div>
+        </section>
+
+        <!-- Cards Section -->
+        <section>
+          <h2 class="text-xl font-semibold mb-6 text-gradient">Cards</h2>
+          <div class="grid-responsive">
+            <Card variant="default">
+              <h3 class="font-semibold mb-2">Default Card</h3>
+              <p class="text-gray-600 dark:text-gray-400">
+                This is a standard card component with default styling.
+              </p>
+            </Card>
+
+            <Card variant="hover">
+              <h3 class="font-semibold mb-2">Hover Card</h3>
+              <p class="text-gray-600 dark:text-gray-400">
+                This card has interactive hover effects. Try hovering over it!
+              </p>
+            </Card>
+
+            <Card variant="gradient">
+              <h3 class="font-semibold mb-2">Gradient Card</h3>
+              <p class="text-gray-600 dark:text-gray-400">
+                Beautiful gradient background for special content.
+              </p>
+            </Card>
+
+            <Card padding="lg">
+              <h3 class="font-semibold mb-2">Large Padding</h3>
+              <p class="text-gray-600 dark:text-gray-400">
+                This card uses large padding for more spacious content.
+              </p>
+            </Card>
+          </div>
+        </section>
+
+        <!-- Badges Section -->
+        <section>
+          <h2 class="text-xl font-semibold mb-6 text-gradient">Badges</h2>
+          <Card>
+            <h3 class="font-medium mb-4">Badge Variants</h3>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <Badge variant="success">Success</Badge>
+              <Badge variant="warning">Warning</Badge>
+              <Badge variant="error">Error</Badge>
+              <Badge variant="info">Info</Badge>
+              <Badge variant="default">Default</Badge>
+            </div>
+
+            <h3 class="font-medium mb-4">Badge Sizes</h3>
+            <div class="flex flex-wrap gap-2">
+              <Badge variant="success" size="sm">Small</Badge>
+              <Badge variant="success" size="md">Medium</Badge>
+              <Badge variant="success" size="lg">Large</Badge>
+            </div>
+          </Card>
+        </section>
+
+        <!-- Forms Section -->
+        <section>
+          <h2 class="text-xl font-semibold mb-6 text-gradient">Forms</h2>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <Card>
+              <h3 class="font-medium mb-4">Input Components</h3>
+              <form class="space-y-4">
+                <Input
+                  type="text"
+                  name="name"
+                  label="Full Name"
+                  placeholder="Enter your full name"
+                  required
+                />
+                
+                <Input
+                  type="email"
+                  name="email"
+                  label="Email Address"
+                  placeholder="Enter your email"
+                  required
+                />
+                
+                <Input
+                  type="password"
+                  name="password"
+                  label="Password"
+                  placeholder="Enter your password"
+                  required
+                />
+                
+                <Input
+                  type="text"
+                  name="error-example"
+                  label="Input with Error"
+                  placeholder="This field has an error"
+                  error="This field is required"
+                />
+                
+                <Button variant="primary" type="submit" fullWidth>
+                  Submit Form
+                </Button>
+              </form>
+            </Card>
+
+            <Card>
+              <h3 class="font-medium mb-4">Global Form Styles</h3>
+              <form class="space-y-4">
+                <div class="form-group">
+                  <label class="form-label">Using Global Classes</label>
+                  <input 
+                    type="text" 
+                    class="form-input" 
+                    placeholder="Input with global classes"
+                  />
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label">Select Dropdown</label>
+                  <select class="form-input">
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label">Textarea</label>
+                  <textarea 
+                    class="form-input" 
+                    rows="3"
+                    placeholder="Enter your message"
+                  ></textarea>
+                </div>
+
+                <button class="btn-primary w-full" type="submit">
+                  Submit with Global Classes
+                </button>
+              </form>
+            </Card>
+          </div>
+        </section>
+
+        <!-- Authentication Section -->
+        <section>
+          <h2 class="text-xl font-semibold mb-6 text-gradient">Authentication</h2>
+          <div class="max-w-md mx-auto">
+            <LoginForm 
+              title="Demo Login"
+              subtitle="Try demo@example.com / demo123"
+              redirectTo="/demo"
+            />
+          </div>
+        </section>
+
+        <!-- Loading States Section -->
+        <section>
+          <h2 class="text-xl font-semibold mb-6 text-gradient">Loading States</h2>
+          <div class="grid-responsive">
+            <CardSkeleton rows={2} showHeader={true} />
+            <CardSkeleton rows={3} showHeader={false} showFooter={true} />
+            <CardSkeleton rows={1} showHeader={true} showFooter={true} />
+            
+            <Card>
+              <h3 class="font-medium mb-4">Loading Utilities</h3>
+              <div class="space-y-4">
+                <div class="flex items-center space-x-2">
+                  <div class="loading-spinner w-4 h-4"></div>
+                  <span>Loading spinner</span>
+                </div>
+                
+                <div class="space-y-2">
+                  <div class="skeleton h-4 w-full"></div>
+                  <div class="skeleton h-4 w-3/4"></div>
+                  <div class="skeleton h-4 w-1/2"></div>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </section>
+
+        <!-- Status Indicators -->
+        <section>
+          <h2 class="text-xl font-semibold mb-6 text-gradient">Status Indicators</h2>
+          <Card>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div class="flex items-center space-x-2">
+                <div class="status-online"></div>
+                <span>Online</span>
+              </div>
+              
+              <div class="flex items-center space-x-2">
+                <div class="status-warning"></div>
+                <span>Warning</span>
+              </div>
+              
+              <div class="flex items-center space-x-2">
+                <div class="status-offline"></div>
+                <span>Offline</span>
+              </div>
+            </div>
+          </Card>
+        </section>
+
+        <!-- Layout Utilities -->
+        <section>
+          <h2 class="text-xl font-semibold mb-6 text-gradient">Layout Utilities</h2>
+          
+          <Card class="mb-6">
+            <h3 class="font-medium mb-4">Responsive Grid</h3>
+            <div class="grid-responsive">
+              <div class="bg-emerald-100 dark:bg-emerald-900/20 p-4 rounded-lg text-center">
+                Item 1
+              </div>
+              <div class="bg-emerald-100 dark:bg-emerald-900/20 p-4 rounded-lg text-center">
+                Item 2
+              </div>
+              <div class="bg-emerald-100 dark:bg-emerald-900/20 p-4 rounded-lg text-center">
+                Item 3
+              </div>
+              <div class="bg-emerald-100 dark:bg-emerald-900/20 p-4 rounded-lg text-center">
+                Item 4
+              </div>
+            </div>
+          </Card>
+
+          <Card>
+            <h3 class="font-medium mb-4">Stats Grid</h3>
+            <div class="grid-stats">
+              <div class="bg-blue-100 dark:bg-blue-900/20 p-4 rounded-lg text-center">
+                Stat 1
+              </div>
+              <div class="bg-blue-100 dark:bg-blue-900/20 p-4 rounded-lg text-center">
+                Stat 2
+              </div>
+              <div class="bg-blue-100 dark:bg-blue-900/20 p-4 rounded-lg text-center">
+                Stat 3
+              </div>
+              <div class="bg-blue-100 dark:bg-blue-900/20 p-4 rounded-lg text-center">
+                Stat 4
+              </div>
+            </div>
+          </Card>
+        </section>
+
+        <!-- Modal Demo -->
+        <section>
+          <h2 class="text-xl font-semibold mb-6 text-gradient">Modal</h2>
+          <Card>
+            <h3 class="font-medium mb-4">Modal Component</h3>
+            <Button 
+              variant="primary"
+              data-action="open-modal"
+              data-target="demo-modal"
+            >
+              Open Modal
+            </Button>
+          </Card>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- Demo Modal -->
+    <div 
+      id="demo-modal"
+      class="modal-overlay hidden"
+      data-modal-overlay="true"
+    >
+      <div class="modal-content max-w-md" data-modal-content="true">
+        <div class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
+            Demo Modal
+          </h3>
+          <button 
+            type="button"
+            class="btn-ghost p-2 rounded-lg"
+            data-modal-close="true"
+            aria-label="Close modal"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        
+        <div class="p-6">
+      <p class="mb-4">
+        This is a demo modal component. It supports various sizes, backdrop clicking to close, 
+        and can contain any content you need.
+      </p>
+      
+      <div class="space-y-3">
+        <Input
+          type="text"
+          label="Modal Input"
+          placeholder="Try typing something"
+        />
+        
+        <div class="flex space-x-2">
+          <Badge variant="info">Modal Content</Badge>
+          <Badge variant="success">Interactive</Badge>
+        </div>
+      </div>
+      
+        </div>
+        
+        <div class="flex justify-end space-x-3 p-6 border-t border-gray-200 dark:border-gray-700">
+          <button class="btn-ghost" data-modal-close="true">
+            Cancel
+          </button>
+          <button class="btn-primary" data-modal-close="true">
+            Save Changes
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </DashboardLayout>
+</Layout>
+
+<script>
+  // Add any demo-specific JavaScript here
+  console.log('Component library demo loaded!');
+
+  // Handle modal opening
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    
+    // Open modal when clicking button with data-action="open-modal"
+    if (target.hasAttribute('data-action') && target.getAttribute('data-action') === 'open-modal') {
+      const modalId = target.getAttribute('data-target');
+      if (modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+          modal.classList.remove('hidden');
+          modal.classList.add('flex');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+    }
+  });
+</script>

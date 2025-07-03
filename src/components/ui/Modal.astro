@@ -1,0 +1,147 @@
+---
+export interface Props {
+  isOpen?: boolean;
+  title?: string;
+  size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
+  showCloseButton?: boolean;
+  closeOnBackdrop?: boolean;
+  class?: string;
+}
+
+const { 
+  isOpen = false,
+  title,
+  size = 'md',
+  showCloseButton = true,
+  closeOnBackdrop = true,
+  class: className = '',
+  ...rest
+} = Astro.props;
+
+const sizeClasses = {
+  sm: 'max-w-sm',
+  md: 'max-w-md',
+  lg: 'max-w-lg',
+  xl: 'max-w-xl',
+  full: 'max-w-full mx-4'
+};
+
+const modalClasses = [
+  'modal-content',
+  sizeClasses[size as keyof typeof sizeClasses],
+  className
+].filter(Boolean).join(' ');
+---
+
+<div 
+  class={`modal-overlay ${isOpen ? 'flex' : 'hidden'}`}
+  data-modal-overlay={closeOnBackdrop ? 'true' : 'false'}
+  {...rest}
+>
+  <div class={modalClasses} data-modal-content="true">
+    {(title || showCloseButton) && (
+      <div class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+        {title && (
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
+            {title}
+          </h3>
+        )}
+        
+        {showCloseButton && (
+          <button 
+            type="button"
+            class="btn-ghost p-2 rounded-lg"
+            data-modal-close="true"
+            aria-label="Close modal"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        )}
+      </div>
+    )}
+    
+    <div class="p-6">
+      <slot />
+    </div>
+    
+    <slot name="footer" />
+  </div>
+</div>
+
+<script>
+  class ModalManager {
+    constructor() {
+      this.initModals();
+    }
+
+    initModals() {
+      document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        
+        // Close modal when clicking close button
+        if (target.closest('[data-modal-close]')) {
+          const modal = target.closest('.modal-overlay');
+          if (modal) {
+            this.closeModal(modal as HTMLElement);
+          }
+        }
+        
+        // Close modal when clicking backdrop
+        if (target.hasAttribute('data-modal-overlay') && target.getAttribute('data-modal-overlay') === 'true') {
+          this.closeModal(target as HTMLElement);
+        }
+      });
+
+      // Close modal on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          const openModal = document.querySelector('.modal-overlay:not(.hidden)');
+          if (openModal) {
+            this.closeModal(openModal as HTMLElement);
+          }
+        }
+      });
+    }
+
+    closeModal(modal: HTMLElement) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    openModal(modalId: string) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+  }
+
+  // Initialize modal manager
+  document.addEventListener('DOMContentLoaded', () => {
+    new ModalManager();
+  });
+
+  // Export functions for external use
+  (window as any).openModal = (modalId: string) => {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  (window as any).closeModal = (modalId: string) => {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+  };
+</script>
