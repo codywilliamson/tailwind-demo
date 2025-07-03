@@ -1,0 +1,29 @@
+---
+import DashboardLayout from '../layouts/DashboardLayout.astro';
+import StatsCard from '../components/StatsCard.astro';
+import ServerStatusCard from '../components/ServerStatusCard.astro';
+import DarkModeToggle from '../components/DarkModeToggle.astro';
+import "../styles/global.css";
+---
+<DashboardLayout>
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100">Advanced Dashboard</h1>
+    <DarkModeToggle />
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+    <StatsCard title="Servers" value="8" color="blue" icon='<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h18M3 12h18M3 19h18" /></svg>' />
+    <StatsCard title="Incidents" value="2" color="red" icon='<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>' />
+    <StatsCard title="Users" value="120" color="green" icon='<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m7-9.13a4 4 0 11-8 0 4 4 0 018 0zm6 4v1a3 3 0 01-3 3h-1.28" /></svg>' />
+    <StatsCard title="Alerts" value="5" color="purple" icon='<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 1010 10A10 10 0 0012 2z" /></svg>' />
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <ServerStatusCard name="Web-01" cpu={55} memory={70} status="online" />
+    <ServerStatusCard name="Web-02" cpu={35} memory={40} status="online" />
+    <ServerStatusCard name="DB-01" cpu={80} memory={90} status="offline" />
+    <ServerStatusCard name="Cache-01" cpu={25} memory={30} status="online" />
+    <ServerStatusCard name="Queue-01" cpu={45} memory={50} status="online" />
+    <ServerStatusCard name="Worker-01" cpu={60} memory={65} status="online" />
+  </div>
+</DashboardLayout>
