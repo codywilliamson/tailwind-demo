@@ -1,48 +1,103 @@
-# Astro Starter Kit: Basics
+# Tailwind CSS Dashboard Demo
 
-```sh
-npm create astro@latest -- --template basics
+A DUMMY DevOps monitoring dashboard built with Astro.js and Tailwind CSS to demonstrate the power of utility-first CSS for backend developers.
+
+## Features
+
+- 📊 Interactive dashboard with charts and metrics
+- 🔔 Notification system components
+- ⚡ Resource usage timeline
+- 🎛️ Toggle switches and interactive elements
+- 📱 Fully responsive design
+- 🎨 Built entirely with Tailwind CSS utilities
+
+## Technologies Used
+
+- **Astro.js** - Modern static site generator
+- **Tailwind CSS** - Utility-first CSS framework
+- **TypeScript** - Type-safe JavaScript
+
+## Quick Start
+
+### Development
+
+```bash
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm run dev
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+Visit `http://localhost:4321` to see the dashboard.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### Build for Production
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+```bash
+# Build the project
+pnpm run build
 
-## 🚀 Project Structure
+# Preview the build
+pnpm run preview
+```
 
-Inside of your Astro project, you'll see the following folders and files:
+## Deploy to Netlify
 
-```text
+### Option 1: Drag and Drop
+
+1. Run `pnpm run build`
+2. Drag the `dist` folder to [Netlify's deploy interface](https://app.netlify.com/drop)
+
+### Option 2: Git Integration
+
+1. Push this project to a Git repository (GitHub, GitLab, etc.)
+2. Connect your repository to Netlify
+3. Netlify will automatically detect the build settings from `netlify.toml`
+
+### Option 3: Netlify CLI
+
+```bash
+# Install Netlify CLI
+pnpm install -g netlify-cli
+
+# Build and deploy
+pnpm run build
+netlify deploy --prod --dir=dist
+```
+
+## Project Structure
+
+```
 /
-├── public/
-│   └── favicon.svg
+├── public/           # Static assets
 ├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/   # Reusable components
+│   ├── layouts/      # Page layouts
+│   ├── pages/        # Page components
+│   └── styles/       # Global styles
+├── netlify.toml      # Netlify configuration
+├── astro.config.mjs  # Astro configuration
+└── tailwind.config.js # Tailwind configuration
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Demo Components
 
-## 🧞 Commands
+This project includes several components that showcase Tailwind CSS features:
 
-All commands are run from the root of the project, from a terminal:
+- **StatsCard** - Metric display cards with hover effects
+- **LineChart** - Data visualization with pure CSS
+- **DeploymentTable** - Responsive data tables
+- **AlertCard** - Status notifications with different states
+- **NotificationBell** - Comparison between CSS and Tailwind approaches
+- **ToggleSwitch** - Interactive form controls
+- **ResourceTimeline** - Timeline visualization with tooltips
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Learning Resources
 
-## 👀 Want to learn more?
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [Astro Documentation](https://docs.astro.build/)
+- [TAILWIND-DEMO.md](./TAILWIND-DEMO.md) - Comprehensive guide to Tailwind CSS
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## License
+
+MIT License - feel free to use this project for learning and demonstration purposes.
