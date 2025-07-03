@@ -3,68 +3,296 @@ import Layout from './Layout.astro';
 ---
 
 <Layout>
-  <div class="flex h-screen bg-gray-100 dark:bg-gray-900">
+  <div class="flex h-screen bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-gray-900 dark:to-emerald-900">
+    <!-- Mobile Menu Overlay -->
+    <div 
+      id="mobile-overlay"
+      class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40 lg:hidden hidden transition-opacity duration-300"
+    ></div>
+
     <!-- Sidebar -->
-    <aside class="w-64 bg-slate-800 text-white p-4">
-      <div class="flex items-center mb-8">
-        <div class="bg-blue-500 w-10 h-10 rounded-lg flex items-center justify-center mr-3">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
+    <aside 
+      id="sidebar"
+      class="fixed lg:static inset-y-0 left-0 z-50 w-64 bg-gradient-to-b from-slate-800 via-slate-900 to-emerald-900 text-white transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out shadow-2xl"
+    >
+      <div class="flex flex-col h-full">
+        <!-- Header -->
+        <div class="flex items-center justify-between p-4 border-b border-slate-700/50">
+          <div class="flex items-center">
+            <div class="bg-gradient-to-br from-emerald-400 to-teal-500 w-10 h-10 rounded-xl flex items-center justify-center mr-3 shadow-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <div>
+              <h1 class="text-lg font-bold bg-gradient-to-r from-emerald-300 to-teal-300 bg-clip-text text-transparent">DevOps</h1>
+              <p class="text-xs text-slate-400">Command Center</p>
+            </div>
+          </div>
+          
+          <!-- Close button for mobile -->
+          <button 
+            id="close-sidebar"
+            class="lg:hidden p-2 rounded-lg hover:bg-slate-700/50 transition-colors duration-200"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
         </div>
-        <h1 class="text-xl font-bold">DevOps Dashboard</h1>
+        
+        <!-- Navigation -->
+        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+          <a href="#" class="flex items-center p-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg transform transition-all duration-200 hover:scale-105">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+            </svg>
+            <span class="font-medium">Dashboard</span>
+          </a>
+          
+          <a href="#" class="flex items-center p-3 rounded-xl hover:bg-gradient-to-r hover:from-emerald-600/20 hover:to-teal-600/20 text-slate-300 hover:text-white transition-all duration-200 group">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 group-hover:text-emerald-400" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
+              <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
+            </svg>
+            <span class="font-medium">Analytics</span>
+          </a>
+          
+          <a href="#" class="flex items-center p-3 rounded-xl hover:bg-gradient-to-r hover:from-emerald-600/20 hover:to-teal-600/20 text-slate-300 hover:text-white transition-all duration-200 group">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 group-hover:text-emerald-400" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+            </svg>
+            <span class="font-medium">Services</span>
+            <span class="ml-auto bg-emerald-500 text-white text-xs px-2 py-1 rounded-full">28</span>
+          </a>
+          
+          <a href="#" class="flex items-center p-3 rounded-xl hover:bg-gradient-to-r hover:from-emerald-600/20 hover:to-teal-600/20 text-slate-300 hover:text-white transition-all duration-200 group">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 group-hover:text-emerald-400" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="font-medium">Deployments</span>
+          </a>
+          
+          <a href="#" class="flex items-center p-3 rounded-xl hover:bg-gradient-to-r hover:from-emerald-600/20 hover:to-teal-600/20 text-slate-300 hover:text-white transition-all duration-200 group">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 group-hover:text-emerald-400" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+            </svg>
+            <span class="font-medium">Logs</span>
+          </a>
+          
+          <a href="#" class="flex items-center p-3 rounded-xl hover:bg-gradient-to-r hover:from-emerald-600/20 hover:to-teal-600/20 text-slate-300 hover:text-white transition-all duration-200 group">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 group-hover:text-emerald-400" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+            </svg>
+            <span class="font-medium">Settings</span>
+          </a>
+        </nav>
+        
+        <!-- Footer -->
+        <div class="p-4 border-t border-slate-700/50">
+          <div class="flex items-center space-x-3 p-3 rounded-xl bg-gradient-to-r from-emerald-900/50 to-teal-900/50 border border-emerald-700/30">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center">
+              <span class="text-white text-sm font-semibold">JD</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-white truncate">John Doe</p>
+              <p class="text-xs text-slate-400 truncate">Admin</p>
+            </div>
+            <button class="p-1 rounded-lg hover:bg-slate-700/50 transition-colors duration-200">
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
       </div>
-      
-      <nav>
-        <ul class="space-y-2">
-          <li>
-            <a href="#" class="flex items-center p-2 rounded-lg bg-slate-700 text-white">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-              </svg>
-              Dashboard
-            </a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center p-2 rounded-lg hover:bg-slate-700 text-gray-300">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
-                <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
-              </svg>
-              Analytics
-            </a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center p-2 rounded-lg hover:bg-slate-700 text-gray-300">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-              </svg>
-              Services
-            </a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center p-2 rounded-lg hover:bg-slate-700 text-gray-300">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
-              </svg>
-              Logs
-            </a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center p-2 rounded-lg hover:bg-slate-700 text-gray-300">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
-              </svg>
-              Settings
-            </a>
-          </li>
-        </ul>
-      </nav>
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 p-6 overflow-auto text-gray-900 dark:text-gray-100">
-      <slot />
-    </main>
+    <div class="flex-1 flex flex-col min-w-0">
+      <!-- Mobile Header -->
+      <header class="lg:hidden bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 px-4 py-3">
+        <div class="flex items-center justify-between">
+          <button 
+            id="mobile-menu-btn"
+            class="p-2 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+          
+          <div class="flex items-center">
+            <div class="bg-gradient-to-br from-emerald-400 to-teal-500 w-8 h-8 rounded-lg flex items-center justify-center mr-2 shadow-md">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <span class="text-lg font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">DevOps</span>
+          </div>
+          
+          <div class="w-10"></div> <!-- Spacer for centering -->
+        </div>
+      </header>
+
+      <!-- Main Content Area -->
+      <main class="flex-1 p-4 lg:p-6 overflow-auto bg-gradient-to-br from-emerald-50/50 to-teal-50/50 dark:from-gray-900 dark:to-emerald-900/20">
+        <slot />
+      </main>
+    </div>
   </div>
 </Layout>
+
+<script>
+  class MobileNavigation {
+    private sidebar: HTMLElement | null;
+    private overlay: HTMLElement | null;
+    private mobileMenuBtn: HTMLElement | null;
+    private closeSidebarBtn: HTMLElement | null;
+    private isOpen = false;
+
+    constructor() {
+      this.sidebar = document.getElementById('sidebar');
+      this.overlay = document.getElementById('mobile-overlay');
+      this.mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      this.closeSidebarBtn = document.getElementById('close-sidebar');
+      
+      this.init();
+    }
+
+    private init() {
+      // Mobile menu button
+      this.mobileMenuBtn?.addEventListener('click', () => this.toggleSidebar());
+      
+      // Close sidebar button
+      this.closeSidebarBtn?.addEventListener('click', () => this.closeSidebar());
+      
+      // Overlay click
+      this.overlay?.addEventListener('click', () => this.closeSidebar());
+      
+      // Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && this.isOpen) {
+          this.closeSidebar();
+        }
+      });
+      
+      // Handle window resize
+      window.addEventListener('resize', () => {
+        if (window.innerWidth >= 1024) { // lg breakpoint
+          this.closeSidebar();
+        }
+      });
+
+      // Touch gestures for mobile
+      this.setupTouchGestures();
+    }
+
+    private toggleSidebar() {
+      this.isOpen ? this.closeSidebar() : this.openSidebar();
+    }
+
+    private openSidebar() {
+      this.sidebar?.classList.remove('-translate-x-full');
+      this.sidebar?.classList.add('translate-x-0');
+      this.overlay?.classList.remove('hidden');
+      this.overlay?.classList.add('opacity-100');
+      document.body.style.overflow = 'hidden';
+      this.isOpen = true;
+    }
+
+    private closeSidebar() {
+      this.sidebar?.classList.add('-translate-x-full');
+      this.sidebar?.classList.remove('translate-x-0');
+      this.overlay?.classList.add('hidden');
+      this.overlay?.classList.remove('opacity-100');
+      document.body.style.overflow = '';
+      this.isOpen = false;
+    }
+
+    private setupTouchGestures() {
+      let startX = 0;
+      let currentX = 0;
+      let isDragging = false;
+
+      document.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+      });
+
+      document.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        currentX = e.touches[0].clientX;
+      });
+
+      document.addEventListener('touchend', () => {
+        if (!isDragging) return;
+        isDragging = false;
+
+        const diff = currentX - startX;
+        
+        // Swipe right from left edge to open
+        if (startX < 50 && diff > 100 && !this.isOpen) {
+          this.openSidebar();
+        }
+        
+        // Swipe left to close
+        if (diff < -100 && this.isOpen) {
+          this.closeSidebar();
+        }
+      });
+    }
+  }
+
+  // Initialize mobile navigation
+  document.addEventListener('DOMContentLoaded', () => {
+    new MobileNavigation();
+  });
+</script>
+
+<style>
+  /* Custom scrollbar for sidebar */
+  nav::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  nav::-webkit-scrollbar-track {
+    background: rgba(71, 85, 105, 0.3);
+    border-radius: 2px;
+  }
+  
+  nav::-webkit-scrollbar-thumb {
+    background: rgba(16, 185, 129, 0.5);
+    border-radius: 2px;
+  }
+  
+  nav::-webkit-scrollbar-thumb:hover {
+    background: rgba(16, 185, 129, 0.7);
+  }
+
+  /* Smooth transitions for all interactive elements */
+  * {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+  }
+
+  /* Enhanced backdrop blur for overlay */
+  #mobile-overlay {
+    backdrop-filter: blur(8px);
+  }
+
+  /* Custom gradient animations */
+  @keyframes emeraldPulse {
+    0%, 100% { 
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+    50% { 
+      box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+    }
+  }
+
+  .emerald-pulse {
+    animation: emeraldPulse 2s infinite;
+  }
+</style>
