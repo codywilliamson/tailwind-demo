@@ -1,0 +1,33 @@
+---
+const { name = 'Server', cpu = 40, memory = 60, status = 'online' } = Astro.props;
+---
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
+  <div class="flex items-center justify-between mb-2">
+    <h4 class="font-semibold text-gray-800 dark:text-gray-100">{name}</h4>
+    <span class="text-xs px-2 py-1 rounded-full"
+          class:list={[
+            status === 'online' ? 'bg-green-100 text-green-800 dark:bg-green-600 dark:text-white' : '',
+            status === 'offline' ? 'bg-red-100 text-red-800 dark:bg-red-600 dark:text-white' : '',
+          ]}>{status}</span>
+  </div>
+  <div class="space-y-2">
+    <div>
+      <div class="flex justify-between text-sm text-gray-600 dark:text-gray-400">
+        <span>CPU</span>
+        <span>{cpu}%</span>
+      </div>
+      <div class="w-full bg-gray-200 dark:bg-gray-700 h-2 rounded">
+        <div class="bg-blue-500 h-2 rounded" style={`width: ${cpu}%`}></div>
+      </div>
+    </div>
+    <div>
+      <div class="flex justify-between text-sm text-gray-600 dark:text-gray-400">
+        <span>Memory</span>
+        <span>{memory}%</span>
+      </div>
+      <div class="w-full bg-gray-200 dark:bg-gray-700 h-2 rounded">
+        <div class="bg-purple-500 h-2 rounded" style={`width: ${memory}%`}></div>
+      </div>
+    </div>
+  </div>
+</div>

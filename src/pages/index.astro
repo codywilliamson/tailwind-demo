@@ -8,6 +8,7 @@ import ResourceTimeline from '../components/ResourceTimeline.astro';
 import NotificationBell from '../components/NotificationBell.astro';
 import NotificationBellTailwind from '../components/NotificationBellTailwind.astro';
 import ToggleSwitch from '../components/ToggleSwitch.astro';
+import DarkModeToggle from '../components/DarkModeToggle.astro';
 import "../styles/global.css";
 ---
 
@@ -48,7 +49,7 @@ import "../styles/global.css";
   <div class="bg-white rounded-lg shadow p-6 mb-6">
     <h3 class="text-lg font-semibold text-gray-800 mb-4">Tailwind Live Demo</h3>
     <div class="flex flex-col gap-4">
-      <ToggleSwitch label="Dark mode" />
+      <DarkModeToggle />
       <ToggleSwitch label="Auto-refresh" enabled={true} enabledColor="bg-green-600" />
       <ToggleSwitch label="Notifications" enabledColor="bg-purple-600" />
     </div>
