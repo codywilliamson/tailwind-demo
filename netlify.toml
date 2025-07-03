@@ -13,11 +13,10 @@
   NODE_VERSION = "18"
 
 # Redirect rules for SPAs (if needed)
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  conditions = {Role = ["admin"]}
+# [[redirects]]
+#   from = "/*"
+#   to = "/index.html"
+#   status = 200
 
 # Headers for better performance
 [[headers]]
