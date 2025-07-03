@@ -1,0 +1,28 @@
+---
+const { title, value, icon, color = "blue" } = Astro.props;
+
+// Define color variants based on the color prop
+const colorVariants = {
+  blue: "bg-blue-500",
+  green: "bg-green-500",
+  yellow: "bg-yellow-500",
+  red: "bg-red-500",
+  purple: "bg-purple-500"
+};
+
+const bgColor = colorVariants[color] || colorVariants.blue;
+---
+
+<div class="bg-white rounded-lg shadow p-6 transform transition-transform duration-200 hover:scale-105">
+  <div class="flex items-center">
+    <div class={`${bgColor} rounded-lg p-3`}>
+      <span class="text-white">
+        <Fragment set:html={icon} />
+      </span>
+    </div>
+    <div class="ml-4">
+      <h3 class="text-gray-500 text-sm font-medium">{title}</h3>
+      <p class="text-2xl font-semibold text-gray-800">{value}</p>
+    </div>
+  </div>
+</div>

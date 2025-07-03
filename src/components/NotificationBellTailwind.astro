@@ -1,0 +1,23 @@
+---
+// Number of unread notifications
+const unreadCount = 5;
+---
+
+<div class="relative inline-block">
+  <button class="bg-transparent border-none cursor-pointer p-2 rounded-full transition-colors duration-200 hover:bg-black hover:bg-opacity-5">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" viewBox="0 0 20 20" fill="currentColor">
+      <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+    </svg>
+    {unreadCount > 0 && (
+      <span class="absolute top-0 right-0 bg-red-500 text-white text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full border-2 border-white">
+        {unreadCount}
+      </span>
+    )}
+  </button>
+</div>
+
+<style>
+  button:hover {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+  }
+</style>

@@ -1,0 +1,61 @@
+---
+const { title, caption } = Astro.props;
+---
+
+<div class="bg-white rounded-lg shadow p-6">
+  <h3 class="text-lg font-semibold text-gray-800 mb-2">{title}</h3>
+  <p class="text-sm text-gray-500 mb-4">{caption}</p>
+  
+  <!-- Simple chart implementation with HTML/CSS only -->
+  <div class="relative h-64">
+    <div class="absolute bottom-0 left-0 w-full h-full flex items-end">
+      <div class="w-full flex justify-between items-end">
+        <!-- Data points with tooltips -->
+        <div class="flex flex-col items-center group cursor-pointer">
+          <div class="bg-blue-500 w-2 rounded-t-sm transition-all duration-300 h-20 group-hover:bg-blue-600"></div>
+          <div class="text-xs mt-2 text-gray-600">Mon</div>
+          <div class="absolute bottom-16 opacity-0 group-hover:opacity-100 bg-gray-800 text-white text-xs rounded py-1 px-2 transform -translate-y-2 transition-all duration-300">25 Builds</div>
+        </div>
+        <div class="flex flex-col items-center group cursor-pointer">
+          <div class="bg-blue-500 w-2 rounded-t-sm transition-all duration-300 h-12 group-hover:bg-blue-600"></div>
+          <div class="text-xs mt-2 text-gray-600">Tue</div>
+          <div class="absolute bottom-8 opacity-0 group-hover:opacity-100 bg-gray-800 text-white text-xs rounded py-1 px-2 transform -translate-y-2 transition-all duration-300">15 Builds</div>
+        </div>
+        <div class="flex flex-col items-center group cursor-pointer">
+          <div class="bg-blue-500 w-2 rounded-t-sm transition-all duration-300 h-36 group-hover:bg-blue-600"></div>
+          <div class="text-xs mt-2 text-gray-600">Wed</div>
+          <div class="absolute bottom-32 opacity-0 group-hover:opacity-100 bg-gray-800 text-white text-xs rounded py-1 px-2 transform -translate-y-2 transition-all duration-300">45 Builds</div>
+        </div>
+        <div class="flex flex-col items-center group cursor-pointer">
+          <div class="bg-blue-500 w-2 rounded-t-sm transition-all duration-300 h-28 group-hover:bg-blue-600"></div>
+          <div class="text-xs mt-2 text-gray-600">Thu</div>
+          <div class="absolute bottom-24 opacity-0 group-hover:opacity-100 bg-gray-800 text-white text-xs rounded py-1 px-2 transform -translate-y-2 transition-all duration-300">35 Builds</div>
+        </div>
+        <div class="flex flex-col items-center group cursor-pointer">
+          <div class="bg-blue-500 w-2 rounded-t-sm transition-all duration-300 h-48 group-hover:bg-blue-600"></div>
+          <div class="text-xs mt-2 text-gray-600">Fri</div>
+          <div class="absolute bottom-44 opacity-0 group-hover:opacity-100 bg-gray-800 text-white text-xs rounded py-1 px-2 transform -translate-y-2 transition-all duration-300">60 Builds</div>
+        </div>
+        <div class="flex flex-col items-center group cursor-pointer">
+          <div class="bg-blue-500 w-2 rounded-t-sm transition-all duration-300 h-16 group-hover:bg-blue-600"></div>
+          <div class="text-xs mt-2 text-gray-600">Sat</div>
+          <div class="absolute bottom-12 opacity-0 group-hover:opacity-100 bg-gray-800 text-white text-xs rounded py-1 px-2 transform -translate-y-2 transition-all duration-300">20 Builds</div>
+        </div>
+        <div class="flex flex-col items-center group cursor-pointer">
+          <div class="bg-blue-500 w-2 rounded-t-sm transition-all duration-300 h-8 group-hover:bg-blue-600"></div>
+          <div class="text-xs mt-2 text-gray-600">Sun</div>
+          <div class="absolute bottom-4 opacity-0 group-hover:opacity-100 bg-gray-800 text-white text-xs rounded py-1 px-2 transform -translate-y-2 transition-all duration-300">10 Builds</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Y-axis labels -->
+    <div class="absolute left-0 top-0 h-full flex flex-col justify-between text-xs text-gray-500">
+      <span>60</span>
+      <span>45</span>
+      <span>30</span>
+      <span>15</span>
+      <span>0</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+---
+// Define props with default values
+const { 
+  label = "Toggle me", 
+  enabled = false,
+  enabledColor = "bg-blue-600",
+  disabledColor = "bg-gray-200"
+} = Astro.props;
+---
+
+<div class="flex items-center" id="toggle-container">
+  <label class="inline-flex items-center cursor-pointer">
+    <div class="relative">
+      <input type="checkbox" class="sr-only peer" checked={enabled}>
+      <div class={`w-11 h-6 ${disabledColor} peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:${enabledColor}`}></div>
+    </div>
+    <span class="ml-3 text-sm font-medium text-gray-700">{label}</span>
+  </label>
+</div>
+
+<script>
+  // Make the toggle interactive
+  document.addEventListener('astro:page-load', () => {
+    const toggleContainer = document.getElementById('toggle-container');
+    if (toggleContainer) {
+      const toggle = toggleContainer.querySelector('input[type="checkbox"]');
+      const toggleBg = toggleContainer.querySelector('div.peer');
+      
+      toggle.addEventListener('change', () => {
+        // You could add your own logic here
+        console.log('Toggle state:', toggle.checked);
+      });
+    }
+  });
+</script>
