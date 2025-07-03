@@ -1,3 +1,4 @@
+---
 import Button from '../ui/Button.astro';
 import Input from '../forms/Input.astro';
 import Card from '../ui/Card.astro';
@@ -21,6 +22,7 @@ const {
   redirectTo = "/dashboard",
   class: className = ''
 } = Astro.props;
+---
 
 <Card variant="gradient" class={`w-full max-w-md ${className}`}>
   <div class="text-center mb-6">
