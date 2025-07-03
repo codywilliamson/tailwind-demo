@@ -1,0 +1,291 @@
+---
+import type { Notification } from '../types/dashboard';
+// This would normally be passed as props or fetched from an API
+---
+
+<div class="relative">
+  <!-- Notification Bell Button -->
+  <button 
+    id="notification-bell" 
+    class="relative p-2 text-gray-400 hover:text-gray-600 focus:outline-none focus:text-gray-600 transition-colors duration-200"
+    aria-label="Open notifications"
+  >
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+    </svg>
+    <!-- Notification Badge -->
+    <span 
+      id="notification-badge" 
+      class="absolute -top-1 -right-1 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-500 rounded-full min-w-[20px] opacity-0 scale-0 transition-all duration-300"
+    >
+      0
+    </span>
+  </button>
+
+  <!-- Notification Panel -->
+  <div 
+    id="notification-panel" 
+    class="absolute right-0 mt-2 w-96 bg-white dark:bg-gray-800 rounded-lg shadow-2xl z-50 transform scale-95 opacity-0 pointer-events-none transition-all duration-300 border border-gray-200 dark:border-gray-700"
+  >
+    <!-- Panel Header -->
+    <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Notifications</h3>
+        <div class="flex space-x-2">
+          <button 
+            id="mark-all-read" 
+            class="text-sm text-blue-600 hover:text-blue-800 transition-colors duration-200"
+          >
+            Mark all read
+          </button>
+          <button 
+            id="clear-all" 
+            class="text-sm text-gray-500 hover:text-gray-700 transition-colors duration-200"
+          >
+            Clear all
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notifications List -->
+    <div class="max-h-96 overflow-y-auto">
+      <div id="notifications-container" class="space-y-1">
+        <!-- Notifications will be dynamically inserted here -->
+      </div>
+      
+      <!-- Empty State -->
+      <div id="empty-notifications" class="p-8 text-center text-gray-500 dark:text-gray-400 hidden">
+        <svg class="w-12 h-12 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+        </svg>
+        <p>No notifications</p>
+      </div>
+    </div>
+
+    <!-- Panel Footer -->
+    <div class="p-3 border-t border-gray-200 dark:border-gray-700">
+      <button class="w-full text-center text-sm text-blue-600 hover:text-blue-800 transition-colors duration-200">
+        View all notifications
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { dashboardService } from '../services/dashboardData';
+  import type { Notification } from '../types/dashboard';
+
+  class NotificationCenter {
+    private notifications: Notification[] = [];
+    private isOpen = false;
+
+    constructor() {
+      this.init();
+      this.loadNotifications();
+      this.setupRealTimeUpdates();
+    }
+
+    private init() {
+      const bell = document.getElementById('notification-bell');
+      const panel = document.getElementById('notification-panel');
+      const markAllRead = document.getElementById('mark-all-read');
+      const clearAll = document.getElementById('clear-all');
+
+      bell?.addEventListener('click', () => this.togglePanel());
+      markAllRead?.addEventListener('click', () => this.markAllAsRead());
+      clearAll?.addEventListener('click', () => this.clearAll());
+
+      // Close panel when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!bell?.contains(e.target as Node) && !panel?.contains(e.target as Node)) {
+          this.closePanel();
+        }
+      });
+    }
+
+    private loadNotifications() {
+      this.notifications = dashboardService.generateNotifications();
+      this.renderNotifications();
+      this.updateBadge();
+    }
+
+    private setupRealTimeUpdates() {
+      // Simulate new notifications
+      setInterval(() => {
+        if (Math.random() > 0.8) {
+          this.addNotification(this.generateRandomNotification());
+        }
+      }, 30000);
+    }
+
+    private generateRandomNotification(): Notification {
+      const types = ['deployment', 'alert', 'system', 'security'] as const;
+      const messages = [
+        'New deployment completed successfully',
+        'System maintenance scheduled',
+        'Security scan finished',
+        'High CPU usage detected'
+      ];
+      
+      return {
+        id: `notif-${Date.now()}`,
+        title: 'System Alert',
+        message: messages[Math.floor(Math.random() * messages.length)],
+        type: types[Math.floor(Math.random() * types.length)],
+        read: false,
+        timestamp: new Date().toISOString()
+      };
+    }
+
+    private addNotification(notification: Notification) {
+      this.notifications.unshift(notification);
+      this.renderNotifications();
+      this.updateBadge();
+      this.showNewNotificationAnimation();
+    }
+
+    private showNewNotificationAnimation() {
+      const badge = document.getElementById('notification-badge');
+      badge?.classList.add('animate-bounce');
+      setTimeout(() => {
+        badge?.classList.remove('animate-bounce');
+      }, 1000);
+    }
+
+    private togglePanel() {
+      this.isOpen ? this.closePanel() : this.openPanel();
+    }
+
+    private openPanel() {
+      const panel = document.getElementById('notification-panel');
+      panel?.classList.remove('scale-95', 'opacity-0', 'pointer-events-none');
+      panel?.classList.add('scale-100', 'opacity-100');
+      this.isOpen = true;
+    }
+
+    private closePanel() {
+      const panel = document.getElementById('notification-panel');
+      panel?.classList.add('scale-95', 'opacity-0', 'pointer-events-none');
+      panel?.classList.remove('scale-100', 'opacity-100');
+      this.isOpen = false;
+    }
+
+    private markAllAsRead() {
+      this.notifications.forEach(n => n.read = true);
+      this.renderNotifications();
+      this.updateBadge();
+    }
+
+    private clearAll() {
+      this.notifications = [];
+      this.renderNotifications();
+      this.updateBadge();
+    }
+
+    private updateBadge() {
+      const badge = document.getElementById('notification-badge');
+      const unreadCount = this.notifications.filter(n => !n.read).length;
+      
+      if (badge) {
+        badge.textContent = unreadCount.toString();
+        if (unreadCount > 0) {
+          badge.classList.remove('opacity-0', 'scale-0');
+          badge.classList.add('opacity-100', 'scale-100');
+        } else {
+          badge.classList.add('opacity-0', 'scale-0');
+          badge.classList.remove('opacity-100', 'scale-100');
+        }
+      }
+    }
+
+    private renderNotifications() {
+      const container = document.getElementById('notifications-container');
+      const emptyState = document.getElementById('empty-notifications');
+      
+      if (!container || !emptyState) return;
+
+      if (this.notifications.length === 0) {
+        container.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      container.innerHTML = this.notifications.map(notification => this.renderNotification(notification)).join('');
+      
+      // Add click handlers for individual notifications
+      container.querySelectorAll('.notification-item').forEach((item, index) => {
+        item.addEventListener('click', () => this.markAsRead(index));
+      });
+    }
+
+    private renderNotification(notification: Notification): string {
+      const typeIcons = {
+        deployment: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path>',
+        alert: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"></path>',
+        system: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>',
+        security: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>'
+      };
+
+      const typeColors = {
+        deployment: 'text-blue-500',
+        alert: 'text-yellow-500',
+        system: 'text-gray-500',
+        security: 'text-green-500'
+      };
+
+      const timeAgo = this.getTimeAgo(notification.timestamp);
+      
+      return `
+        <div class="notification-item p-3 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer transition-colors duration-200 ${notification.read ? 'opacity-60' : ''}">
+          <div class="flex items-start space-x-3">
+            <div class="flex-shrink-0">
+              <svg class="w-5 h-5 ${typeColors[notification.type]}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                ${typeIcons[notification.type]}
+              </svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-gray-900 dark:text-gray-100 ${notification.read ? '' : 'font-semibold'}">
+                ${notification.title}
+              </p>
+              <p class="text-sm text-gray-500 dark:text-gray-400 truncate">
+                ${notification.message}
+              </p>
+              <p class="text-xs text-gray-400 dark:text-gray-500 mt-1">
+                ${timeAgo}
+              </p>
+            </div>
+            ${!notification.read ? '<div class="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></div>' : ''}
+          </div>
+        </div>
+      `;
+    }
+
+    private markAsRead(index: number) {
+      this.notifications[index].read = true;
+      this.renderNotifications();
+      this.updateBadge();
+    }
+
+    private getTimeAgo(timestamp: string): string {
+      const now = new Date();
+      const time = new Date(timestamp);
+      const diffInMinutes = Math.floor((now.getTime() - time.getTime()) / (1000 * 60));
+      
+      if (diffInMinutes < 1) return 'Just now';
+      if (diffInMinutes < 60) return `${diffInMinutes}m ago`;
+      
+      const diffInHours = Math.floor(diffInMinutes / 60);
+      if (diffInHours < 24) return `${diffInHours}h ago`;
+      
+      const diffInDays = Math.floor(diffInHours / 24);
+      return `${diffInDays}d ago`;
+    }
+  }
+
+  // Initialize the notification center when the DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    new NotificationCenter();
+  });
+</script>

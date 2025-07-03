@@ -1,0 +1,201 @@
+---
+export interface Props {
+  id: string;
+  title?: string;
+  size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
+  showCloseButton?: boolean;
+}
+
+const { id, title, size = 'md', showCloseButton = true } = Astro.props;
+
+const sizeClasses: Record<string, string> = {
+  sm: 'max-w-md',
+  md: 'max-w-lg',
+  lg: 'max-w-2xl', 
+  xl: 'max-w-4xl',
+  full: 'max-w-7xl'
+};
+---
+
+<!-- Modal Backdrop -->
+<div 
+  id={`${id}-backdrop`}
+  class="fixed inset-0 z-50 hidden"
+  aria-hidden="true"
+>
+  <!-- Backdrop overlay -->
+  <div class="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm transition-opacity duration-300 opacity-0"></div>
+  
+  <!-- Modal container -->
+  <div class="flex min-h-screen items-center justify-center p-4">
+    <div 
+      id={`${id}-panel`}
+      class={`relative w-full ${sizeClasses[size]} transform rounded-lg bg-white dark:bg-gray-800 shadow-2xl transition-all duration-300 scale-95 opacity-0`}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby={title ? `${id}-title` : undefined}
+    >
+      <!-- Modal Header -->
+      {title && (
+        <div class="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 px-6 py-4">
+          <h3 id={`${id}-title`} class="text-lg font-semibold text-gray-900 dark:text-gray-100">
+            {title}
+          </h3>
+          {showCloseButton && (
+            <button 
+              type="button" 
+              class="modal-close rounded-md p-1 text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
+              aria-label="Close modal"
+            >
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          )}
+        </div>
+      )}
+      
+      <!-- Modal Body -->
+      <div class="px-6 py-4">
+        <slot />
+      </div>
+      
+      <!-- Modal Footer -->
+      <slot name="footer" />
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ id }}>
+  class Modal {
+    constructor(modalId) {
+      this.modalId = modalId;
+      this.backdrop = document.getElementById(`${modalId}-backdrop`);
+      this.panel = document.getElementById(`${modalId}-panel`);
+      this.isOpen = false;
+      
+      this.init();
+    }
+    
+    init() {
+      // Close button handlers
+      this.backdrop?.querySelectorAll('.modal-close').forEach(button => {
+        button.addEventListener('click', () => this.close());
+      });
+      
+      // Close on backdrop click
+      this.backdrop?.addEventListener('click', (e) => {
+        if (e.target === this.backdrop) {
+          this.close();
+        }
+      });
+      
+      // Close on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && this.isOpen) {
+          this.close();
+        }
+      });
+      
+      // Expose methods globally
+      window[`${this.modalId}Modal`] = {
+        open: () => this.open(),
+        close: () => this.close(),
+        toggle: () => this.toggle()
+      };
+    }
+    
+    open() {
+      if (this.isOpen) return;
+      
+      this.backdrop?.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      
+      // Trigger animations
+      setTimeout(() => {
+        const overlay = this.backdrop?.querySelector('.bg-black');
+        overlay?.classList.remove('opacity-0');
+        overlay?.classList.add('opacity-100');
+        
+        this.panel?.classList.remove('scale-95', 'opacity-0');
+        this.panel?.classList.add('scale-100', 'opacity-100');
+      }, 10);
+      
+      this.isOpen = true;
+      
+      // Focus trap
+      this.focusFirstElement();
+      
+      // Emit custom event
+      this.backdrop?.dispatchEvent(new CustomEvent('modal:open', { 
+        detail: { modalId: this.modalId } 
+      }));
+    }
+    
+    close() {
+      if (!this.isOpen) return;
+      
+      const overlay = this.backdrop?.querySelector('.bg-black');
+      overlay?.classList.add('opacity-0');
+      overlay?.classList.remove('opacity-100');
+      
+      this.panel?.classList.add('scale-95', 'opacity-0');
+      this.panel?.classList.remove('scale-100', 'opacity-100');
+      
+      setTimeout(() => {
+        this.backdrop?.classList.add('hidden');
+        document.body.style.overflow = '';
+      }, 300);
+      
+      this.isOpen = false;
+      
+      // Emit custom event
+      this.backdrop?.dispatchEvent(new CustomEvent('modal:close', { 
+        detail: { modalId: this.modalId } 
+      }));
+    }
+    
+    toggle() {
+      this.isOpen ? this.close() : this.open();
+    }
+    
+    focusFirstElement() {
+      const focusableElements = this.panel?.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusableElements && focusableElements.length > 0) {
+        focusableElements[0].focus();
+      }
+    }
+  }
+  
+  // Initialize modal when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    new Modal(id);
+  });
+</script>
+
+<style>
+  /* Smooth backdrop blur transition */
+  .backdrop-blur-sm {
+    backdrop-filter: blur(4px);
+  }
+  
+  /* Custom scrollbar for modal content */
+  .modal-content::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .modal-content::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .modal-content::-webkit-scrollbar-thumb {
+    background-color: rgba(156, 163, 175, 0.5);
+    border-radius: 3px;
+  }
+  
+  .modal-content::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(156, 163, 175, 0.7);
+  }
+</style>

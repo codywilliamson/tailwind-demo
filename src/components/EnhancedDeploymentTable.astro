@@ -1,0 +1,630 @@
+---
+import Modal from './Modal.astro';
+---
+
+<div class="bg-gradient-to-br from-white to-emerald-50/30 dark:from-gray-800 dark:to-emerald-900/10 rounded-lg shadow-lg overflow-hidden border border-emerald-100/50 dark:border-emerald-900/20">
+  <!-- Table Header with Controls -->
+  <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100">Deployments</h3>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Manage and monitor your application deployments</p>
+      </div>
+      
+      <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
+        <!-- Search Input -->
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+          <input 
+            id="deployment-search" 
+            type="text" 
+            placeholder="Search deployments..." 
+            class="pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-colors duration-200"
+          />
+        </div>
+        
+        <!-- Environment Filter -->
+        <select 
+          id="environment-filter" 
+          class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors duration-200"
+        >
+          <option value="">All Environments</option>
+          <option value="production">Production</option>
+          <option value="staging">Staging</option>
+          <option value="development">Development</option>
+        </select>
+        
+        <!-- Status Filter -->
+        <select 
+          id="status-filter" 
+          class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors duration-200"
+        >
+          <option value="">All Statuses</option>
+          <option value="success">Success</option>
+          <option value="running">Running</option>
+          <option value="failed">Failed</option>
+          <option value="pending">Pending</option>
+        </select>
+        
+        <!-- Refresh Button -->
+        <button 
+          id="refresh-deployments" 
+          class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 flex items-center space-x-2"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+          </svg>
+          <span>Refresh</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="overflow-x-auto">
+    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+      <thead class="bg-gray-50 dark:bg-gray-900">
+        <tr>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200" data-sort="name">
+            <div class="flex items-center space-x-1">
+              <span>Service</span>
+              <svg class="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
+              </svg>
+            </div>
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200" data-sort="environment">
+            <div class="flex items-center space-x-1">
+              <span>Environment</span>
+              <svg class="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
+              </svg>
+            </div>
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200" data-sort="status">
+            <div class="flex items-center space-x-1">
+              <span>Status</span>
+              <svg class="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
+              </svg>
+            </div>
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200" data-sort="timestamp">
+            <div class="flex items-center space-x-1">
+              <span>Deployed</span>
+              <svg class="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
+              </svg>
+            </div>
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Author</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Duration</th>
+          <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="deployments-tbody" class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+        <!-- Dynamic content will be inserted here -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <div class="bg-white dark:bg-gray-800 px-4 py-3 flex items-center justify-between border-t border-gray-200 dark:border-gray-700 sm:px-6">
+    <div class="flex-1 flex justify-between sm:hidden">
+      <button id="prev-mobile" class="relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200">
+        Previous
+      </button>
+      <button id="next-mobile" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200">
+        Next
+      </button>
+    </div>
+    <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+      <div>
+        <p class="text-sm text-gray-700 dark:text-gray-300">
+          Showing <span id="showing-from" class="font-medium">1</span> to <span id="showing-to" class="font-medium">10</span> of <span id="total-results" class="font-medium">47</span> results
+        </p>
+      </div>
+      <div>
+        <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" id="pagination-nav">
+          <!-- Pagination buttons will be dynamically generated -->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div id="loading-deployments" class="hidden absolute inset-0 bg-white dark:bg-gray-800 bg-opacity-75 flex items-center justify-center">
+    <div class="flex items-center space-x-2">
+      <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
+      <span class="text-gray-600 dark:text-gray-400">Loading deployments...</span>
+    </div>
+  </div>
+</div>
+
+<!-- Deployment Details Modal -->
+<Modal id="deployment-details" title="Deployment Details" size="lg">
+  <div id="deployment-modal-content">
+    <!-- Dynamic content will be inserted here -->
+  </div>
+  <div slot="footer" class="flex justify-end space-x-3 px-6 py-4 border-t border-gray-200 dark:border-gray-700">
+    <button class="modal-close px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200">
+      Close
+    </button>
+    <button id="rollback-deployment" class="px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors duration-200">
+      Rollback
+    </button>
+  </div>
+</Modal>
+
+<script>
+  import { dashboardService } from '../services/dashboardData';
+  import type { Deployment } from '../types/dashboard';
+
+  class EnhancedDeploymentTable {
+    private deployments: Deployment[] = [];
+    private filteredDeployments: Deployment[] = [];
+    private currentPage = 1;
+    private itemsPerPage = 10;
+    private sortField = 'timestamp';
+    private sortDirection: 'asc' | 'desc' = 'desc';
+
+    constructor() {
+      this.init();
+      this.loadDeployments();
+    }
+
+    private init() {
+      // Search input
+      const searchInput = document.getElementById('deployment-search') as HTMLInputElement;
+      searchInput?.addEventListener('input', (e) => {
+        const target = e.target as HTMLInputElement;
+        this.handleSearch(target.value);
+      });
+
+      // Filter dropdowns
+      const envFilter = document.getElementById('environment-filter') as HTMLSelectElement;
+      const statusFilter = document.getElementById('status-filter') as HTMLSelectElement;
+      
+      envFilter?.addEventListener('change', () => this.handleFilter());
+      statusFilter?.addEventListener('change', () => this.handleFilter());
+
+      // Refresh button
+      const refreshBtn = document.getElementById('refresh-deployments');
+      refreshBtn?.addEventListener('click', () => this.refreshDeployments());
+
+      // Sort headers
+      document.querySelectorAll('[data-sort]').forEach(header => {
+        header.addEventListener('click', () => {
+          const field = header.getAttribute('data-sort');
+          if (field) this.handleSort(field);
+        });
+      });
+
+      // Setup real-time updates
+      this.setupRealTimeUpdates();
+    }
+
+    private loadDeployments() {
+      this.showLoading();
+      // Simulate API call delay
+      setTimeout(() => {
+        this.deployments = dashboardService.generateDeployments();
+        this.filteredDeployments = [...this.deployments];
+        this.renderTable();
+        this.renderPagination();
+        this.hideLoading();
+      }, 500);
+    }
+
+    private refreshDeployments() {
+      const refreshBtn = document.getElementById('refresh-deployments');
+      const icon = refreshBtn?.querySelector('svg');
+      
+      // Add spinning animation
+      icon?.classList.add('animate-spin');
+      
+      this.loadDeployments();
+      
+      setTimeout(() => {
+        icon?.classList.remove('animate-spin');
+      }, 1000);
+    }
+
+    private handleSearch(query: string) {
+      this.filteredDeployments = this.deployments.filter(deployment =>
+        deployment.name.toLowerCase().includes(query.toLowerCase()) ||
+        deployment.author.toLowerCase().includes(query.toLowerCase()) ||
+        deployment.id.toLowerCase().includes(query.toLowerCase())
+      );
+      this.currentPage = 1;
+      this.renderTable();
+      this.renderPagination();
+    }
+
+    private handleFilter() {
+      const envFilter = document.getElementById('environment-filter') as HTMLSelectElement;
+      const statusFilter = document.getElementById('status-filter') as HTMLSelectElement;
+      
+      const envValue = envFilter?.value || '';
+      const statusValue = statusFilter?.value || '';
+
+      this.filteredDeployments = this.deployments.filter(deployment => {
+        const envMatch = !envValue || deployment.environment === envValue;
+        const statusMatch = !statusValue || deployment.status === statusValue;
+        return envMatch && statusMatch;
+      });
+
+      this.currentPage = 1;
+      this.renderTable();
+      this.renderPagination();
+    }
+
+    private handleSort(field: string) {
+      if (this.sortField === field) {
+        this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+      } else {
+        this.sortField = field;
+        this.sortDirection = 'desc';
+      }
+
+      this.filteredDeployments.sort((a, b) => {
+        let aValue, bValue;
+        
+        switch (field) {
+          case 'name':
+            aValue = a.name;
+            bValue = b.name;
+            break;
+          case 'environment':
+            aValue = a.environment;
+            bValue = b.environment;
+            break;
+          case 'status':
+            aValue = a.status;
+            bValue = b.status;
+            break;
+          case 'timestamp':
+            aValue = new Date(a.timestamp).getTime();
+            bValue = new Date(b.timestamp).getTime();
+            break;
+          default:
+            return 0;
+        }
+
+        if (aValue < bValue) return this.sortDirection === 'asc' ? -1 : 1;
+        if (aValue > bValue) return this.sortDirection === 'asc' ? 1 : -1;
+        return 0;
+      });
+
+      this.renderTable();
+      this.updateSortIndicators(field);
+    }
+
+    private updateSortIndicators(activeField: string) {
+      document.querySelectorAll('[data-sort]').forEach(header => {
+        const field = header.getAttribute('data-sort');
+        const icon = header.querySelector('svg');
+        
+        if (field === activeField) {
+          icon?.classList.remove('opacity-50');
+          icon?.classList.add('opacity-100');
+        } else {
+          icon?.classList.add('opacity-50');
+          icon?.classList.remove('opacity-100');
+        }
+      });
+    }
+
+    private renderTable() {
+      const tbody = document.getElementById('deployments-tbody');
+      if (!tbody) return;
+
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+      const pageData = this.filteredDeployments.slice(startIndex, endIndex);
+
+      tbody.innerHTML = pageData.map(deployment => this.renderDeploymentRow(deployment)).join('');
+
+      // Add event listeners for action buttons
+      tbody.querySelectorAll('.view-deployment').forEach((btn, index) => {
+        btn.addEventListener('click', () => this.showDeploymentDetails(pageData[index]));
+      });
+    }
+
+    private renderDeploymentRow(deployment: Deployment): string {
+      const statusColors = {
+        success: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
+        running: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
+        failed: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
+        pending: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
+      };
+
+      const environmentColors = {
+        production: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
+        staging: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
+        development: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+      };
+
+      const formatDate = (dateString: string) => {
+        return new Date(dateString).toLocaleString('en-US', {
+          month: 'short',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+      };
+
+      const formatDuration = (seconds?: number) => {
+        if (!seconds) return 'N/A';
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        return `${minutes}m ${remainingSeconds}s`;
+      };
+
+      return `
+        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="flex items-center">
+              <div class="flex-shrink-0 h-10 w-10">
+                <div class="h-10 w-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                  <span class="text-white font-semibold text-sm">${deployment.name.substring(0, 2).toUpperCase()}</span>
+                </div>
+              </div>
+              <div class="ml-4">
+                <div class="text-sm font-medium text-gray-900 dark:text-gray-100">${deployment.name}</div>
+                <div class="text-sm text-gray-500 dark:text-gray-400">${deployment.id}</div>
+                ${deployment.version ? `<div class="text-xs text-gray-400 dark:text-gray-500">${deployment.version}</div>` : ''}
+              </div>
+            </div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${environmentColors[deployment.environment]}">
+              ${deployment.environment}
+            </span>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusColors[deployment.status]}">
+              ${deployment.status}
+            </span>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
+            ${formatDate(deployment.timestamp)}
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="text-sm text-gray-900 dark:text-gray-100">${deployment.author}</div>
+            ${deployment.commit ? `<div class="text-xs text-gray-500 dark:text-gray-400">${deployment.commit}</div>` : ''}
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
+            ${formatDuration(deployment.duration)}
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
+            <button class="view-deployment text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 transition-colors duration-200">
+              View
+            </button>
+            <button class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300 transition-colors duration-200">
+              Logs
+            </button>
+          </td>
+        </tr>
+      `;
+    }
+
+    private showDeploymentDetails(deployment: Deployment) {
+      const content = document.getElementById('deployment-modal-content');
+      if (!content) return;
+
+      content.innerHTML = this.renderDeploymentDetails(deployment);
+      
+      // Open modal
+      (window as any).deploymentDetailsModal?.open();
+    }
+
+    private renderDeploymentDetails(deployment: Deployment): string {
+      return `
+        <div class="space-y-6">
+          <!-- Header Section -->
+          <div class="flex items-center space-x-4">
+            <div class="h-12 w-12 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+              <span class="text-white font-semibold">${deployment.name.substring(0, 2).toUpperCase()}</span>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-gray-900 dark:text-gray-100">${deployment.name}</h4>
+              <p class="text-sm text-gray-500 dark:text-gray-400">${deployment.id}</p>
+            </div>
+          </div>
+
+          <!-- Details Grid -->
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+              <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Status</dt>
+              <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100">${deployment.status}</dd>
+            </div>
+            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+              <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Environment</dt>
+              <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100">${deployment.environment}</dd>
+            </div>
+            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+              <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Author</dt>
+              <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100">${deployment.author}</dd>
+            </div>
+            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+              <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Duration</dt>
+              <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100">${deployment.duration ? `${Math.floor(deployment.duration / 60)}m ${deployment.duration % 60}s` : 'N/A'}</dd>
+            </div>
+            ${deployment.version ? `
+              <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Version</dt>
+                <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100">${deployment.version}</dd>
+              </div>
+            ` : ''}
+            ${deployment.commit ? `
+              <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Commit</dt>
+                <dd class="mt-1 text-sm font-mono text-gray-900 dark:text-gray-100">${deployment.commit}</dd>
+              </div>
+            ` : ''}
+          </div>
+
+          <!-- Timeline Section -->
+          <div>
+            <h5 class="text-sm font-medium text-gray-900 dark:text-gray-100 mb-3">Deployment Timeline</h5>
+            <div class="flow-root">
+              <ul class="-mb-8">
+                <li class="relative pb-8">
+                  <div class="relative flex space-x-3">
+                    <div class="flex h-8 w-8 items-center justify-center rounded-full bg-blue-500">
+                      <svg class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                      <div>
+                        <p class="text-sm text-gray-900 dark:text-gray-100">Deployment started</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">${new Date(deployment.timestamp).toLocaleString()}</p>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="relative">
+                  <div class="relative flex space-x-3">
+                    <div class="flex h-8 w-8 items-center justify-center rounded-full ${deployment.status === 'success' ? 'bg-green-500' : deployment.status === 'failed' ? 'bg-red-500' : 'bg-yellow-500'}">
+                      <svg class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                      <div>
+                        <p class="text-sm text-gray-900 dark:text-gray-100">Deployment ${deployment.status}</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">${deployment.duration ? `Completed in ${Math.floor(deployment.duration / 60)}m ${deployment.duration % 60}s` : 'Status updated'}</p>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    private renderPagination() {
+      const totalPages = Math.ceil(this.filteredDeployments.length / this.itemsPerPage);
+      const nav = document.getElementById('pagination-nav');
+      const showingFrom = document.getElementById('showing-from');
+      const showingTo = document.getElementById('showing-to');
+      const totalResults = document.getElementById('total-results');
+
+      if (showingFrom && showingTo && totalResults) {
+        const from = (this.currentPage - 1) * this.itemsPerPage + 1;
+        const to = Math.min(this.currentPage * this.itemsPerPage, this.filteredDeployments.length);
+        
+        showingFrom.textContent = from.toString();
+        showingTo.textContent = to.toString();
+        totalResults.textContent = this.filteredDeployments.length.toString();
+      }
+
+      if (!nav) return;
+
+      let paginationHTML = '';
+
+      // Previous button
+      paginationHTML += `
+        <button ${this.currentPage === 1 ? 'disabled' : ''} 
+                class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-600 ${this.currentPage === 1 ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'} transition-colors duration-200"
+                onclick="deploymentTable.goToPage(${this.currentPage - 1})">
+          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+          </svg>
+        </button>
+      `;
+
+      // Page numbers
+      for (let i = 1; i <= totalPages; i++) {
+        if (i === 1 || i === totalPages || (i >= this.currentPage - 2 && i <= this.currentPage + 2)) {
+          paginationHTML += `
+            <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 ${i === this.currentPage ? 'bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-400' : ''} transition-colors duration-200"
+                    onclick="deploymentTable.goToPage(${i})">
+              ${i}
+            </button>
+          `;
+        } else if (i === this.currentPage - 3 || i === this.currentPage + 3) {
+          paginationHTML += `
+            <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm font-medium text-gray-700 dark:text-gray-300">
+              ...
+            </span>
+          `;
+        }
+      }
+
+      // Next button
+      paginationHTML += `
+        <button ${this.currentPage === totalPages ? 'disabled' : ''} 
+                class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-600 ${this.currentPage === totalPages ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'} transition-colors duration-200"
+                onclick="deploymentTable.goToPage(${this.currentPage + 1})">
+          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+          </svg>
+        </button>
+      `;
+
+      nav.innerHTML = paginationHTML;
+    }
+
+    goToPage(page: number) {
+      const totalPages = Math.ceil(this.filteredDeployments.length / this.itemsPerPage);
+      if (page >= 1 && page <= totalPages) {
+        this.currentPage = page;
+        this.renderTable();
+        this.renderPagination();
+      }
+    }
+
+    private showLoading() {
+      document.getElementById('loading-deployments')?.classList.remove('hidden');
+    }
+
+    private hideLoading() {
+      document.getElementById('loading-deployments')?.classList.add('hidden');
+    }
+
+    private setupRealTimeUpdates() {
+      dashboardService.subscribe('new-deployment', (deployment: Deployment) => {
+        this.deployments.unshift(deployment);
+        this.handleFilter(); // Reapply current filters
+        this.showNotification('New deployment detected!');
+      });
+    }
+
+    private showNotification(message: string) {
+      // Create a simple toast notification
+      const toast = document.createElement('div');
+      toast.className = 'fixed top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300';
+      toast.textContent = message;
+      
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.classList.remove('translate-x-full');
+      }, 100);
+      
+      setTimeout(() => {
+        toast.classList.add('translate-x-full');
+        setTimeout(() => {
+          document.body.removeChild(toast);
+        }, 300);
+      }, 3000);
+    }
+  }
+
+  // Initialize the table and expose globally
+  let deploymentTable: EnhancedDeploymentTable;
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    deploymentTable = new EnhancedDeploymentTable();
+    (window as any).deploymentTable = deploymentTable;
+  });
+</script>
