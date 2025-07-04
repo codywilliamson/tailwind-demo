@@ -1,0 +1,656 @@
+---
+import Layout from '../layouts/Layout.astro';
+import DashboardLayout from '../layouts/DashboardLayout.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import Badge from '../components/ui/Badge.astro';
+import Input from '../components/forms/Input.astro';
+import CardSkeleton from '../components/skeletons/CardSkeleton.astro';
+import LoginForm from '../components/auth/LoginForm.astro';
+import DarkModeToggle from '../components/DarkModeToggle.astro';
+import ToggleSwitch from '../components/ToggleSwitch.astro';
+import AlertCard from '../components/AlertCard.astro';
+import StatsCard from '../components/StatsCard.astro';
+import ServerStatusCard from '../components/ServerStatusCard.astro';
+import NotificationBell from '../components/NotificationBell.astro';
+---
+
+<Layout>
+  <DashboardLayout>
+    <div class="container-padding">
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1 class="page-title">Component Library</h1>
+        <p class="page-subtitle">Copy-ready components for your projects</p>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="sticky top-0 z-10 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 mb-8 p-4 rounded-lg">
+        <div class="flex flex-wrap gap-2">
+          <a href="#ui-components" class="nav-link">UI Components</a>
+          <a href="#form-components" class="nav-link">Forms</a>
+          <a href="#auth-components" class="nav-link">Authentication</a>
+          <a href="#data-components" class="nav-link">Data Display</a>
+          <a href="#feedback-components" class="nav-link">Feedback</a>
+          <a href="#layout-components" class="nav-link">Layout</a>
+        </div>
+      </nav>
+
+      <!-- Component Sections -->
+      <div class="space-y-16">
+        
+        <!-- UI Components -->
+        <section id="ui-components">
+          <h2 class="section-title">UI Components</h2>
+          
+          <!-- Button Component -->
+          <div class="component-showcase">
+            <div class="component-header">
+              <h3 class="component-title">Button</h3>
+              <button class="copy-button" data-copy="button-code">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+                Copy Code
+              </button>
+            </div>
+            
+            <div class="component-preview">
+              <div class="flex flex-wrap gap-3">
+                <Button variant="primary">Primary</Button>
+                <Button variant="secondary">Secondary</Button>
+                <Button variant="danger">Danger</Button>
+                <Button variant="ghost">Ghost</Button>
+                <Button variant="link">Link</Button>
+              </div>
+            </div>
+            
+            <div class="component-code">
+              <pre id="button-code" class="code-block"><code>&lt;Button variant="primary"&gt;Primary&lt;/Button&gt;
+&lt;Button variant="secondary"&gt;Secondary&lt;/Button&gt;
+&lt;Button variant="danger"&gt;Danger&lt;/Button&gt;
+&lt;Button variant="ghost"&gt;Ghost&lt;/Button&gt;
+&lt;Button variant="link"&gt;Link&lt;/Button&gt;
+
+&lt;!-- Props --&gt;
+&lt;Button 
+  variant="primary" 
+  size="lg" 
+  fullWidth 
+  loading 
+  disabled
+&gt;
+  Button Text
+&lt;/Button&gt;</code></pre>
+            </div>
+          </div>
+
+          <!-- Card Component -->
+          <div class="component-showcase">
+            <div class="component-header">
+              <h3 class="component-title">Card</h3>
+              <button class="copy-button" data-copy="card-code">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+                Copy Code
+              </button>
+            </div>
+            
+            <div class="component-preview">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <Card variant="default">
+                  <h4 class="font-semibold">Default Card</h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">Standard card styling</p>
+                </Card>
+                <Card variant="hover">
+                  <h4 class="font-semibold">Hover Card</h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">Interactive hover effects</p>
+                </Card>
+                <Card variant="gradient">
+                  <h4 class="font-semibold">Gradient Card</h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">Beautiful gradient background</p>
+                </Card>
+              </div>
+            </div>
+            
+            <div class="component-code">
+              <pre id="card-code" class="code-block"><code>&lt;Card variant="default"&gt;
+  &lt;h4 class="font-semibold"&gt;Default Card&lt;/h4&gt;
+  &lt;p&gt;Card content goes here&lt;/p&gt;
+&lt;/Card&gt;
+
+&lt;Card variant="hover"&gt;Hover Card&lt;/Card&gt;
+&lt;Card variant="gradient"&gt;Gradient Card&lt;/Card&gt;
+&lt;Card padding="lg"&gt;Large padding&lt;/Card&gt;</code></pre>
+            </div>
+          </div>
+
+          <!-- Badge Component -->
+          <div class="component-showcase">
+            <div class="component-header">
+              <h3 class="component-title">Badge</h3>
+              <button class="copy-button" data-copy="badge-code">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+                Copy Code
+              </button>
+            </div>
+            
+            <div class="component-preview">
+              <div class="flex flex-wrap gap-2">
+                <Badge variant="success">Success</Badge>
+                <Badge variant="warning">Warning</Badge>
+                <Badge variant="error">Error</Badge>
+                <Badge variant="info">Info</Badge>
+                <Badge variant="default">Default</Badge>
+              </div>
+            </div>
+            
+            <div class="component-code">
+              <pre id="badge-code" class="code-block"><code>&lt;Badge variant="success"&gt;Success&lt;/Badge&gt;
+&lt;Badge variant="warning"&gt;Warning&lt;/Badge&gt;
+&lt;Badge variant="error"&gt;Error&lt;/Badge&gt;
+&lt;Badge variant="info"&gt;Info&lt;/Badge&gt;
+&lt;Badge variant="default"&gt;Default&lt;/Badge&gt;
+
+&lt;!-- Sizes --&gt;
+&lt;Badge variant="success" size="sm"&gt;Small&lt;/Badge&gt;
+&lt;Badge variant="success" size="md"&gt;Medium&lt;/Badge&gt;
+&lt;Badge variant="success" size="lg"&gt;Large&lt;/Badge&gt;</code></pre>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- Form Components -->
+        <section id="form-components">
+          <h2 class="section-title">Form Components</h2>
+          
+          <!-- Input Component -->
+          <div class="component-showcase">
+            <div class="component-header">
+              <h3 class="component-title">Input</h3>
+              <button class="copy-button" data-copy="input-code">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+                Copy Code
+              </button>
+            </div>
+            
+            <div class="component-preview">
+              <div class="space-y-4 max-w-md">
+                <Input
+                  type="text"
+                  name="name"
+                  label="Full Name"
+                  placeholder="Enter your full name"
+                  required
+                />
+                <Input
+                  type="email"
+                  name="email"
+                  label="Email Address"
+                  placeholder="Enter your email"
+                />
+                <Input
+                  type="password"
+                  name="password"
+                  label="Password"
+                  placeholder="Enter your password"
+                />
+                <Input
+                  type="text"
+                  name="error-demo"
+                  label="Input with Error"
+                  placeholder="This field has an error"
+                  error="This field is required"
+                />
+              </div>
+            </div>
+            
+            <div class="component-code">
+              <pre id="input-code" class="code-block"><code>&lt;Input
+  type="text"
+  name="name"
+  label="Full Name"
+  placeholder="Enter your full name"
+  required
+/&gt;
+
+&lt;Input
+  type="email"
+  name="email"
+  label="Email Address"
+  placeholder="Enter your email"
+  error="This field is required"
+/&gt;</code></pre>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- Authentication Components -->
+        <section id="auth-components">
+          <h2 class="section-title">Authentication Components</h2>
+          
+          <!-- Login Form Component -->
+          <div class="component-showcase">
+            <div class="component-header">
+              <h3 class="component-title">Login Form</h3>
+              <button class="copy-button" data-copy="login-code">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+                Copy Code
+              </button>
+            </div>
+            
+            <div class="component-preview">
+              <div class="max-w-md mx-auto">
+                <LoginForm 
+                  title="Demo Login"
+                  subtitle="Try demo@example.com / demo123"
+                  redirectTo="/components"
+                />
+              </div>
+            </div>
+            
+            <div class="component-code">
+              <pre id="login-code" class="code-block"><code>&lt;LoginForm 
+  title="Welcome back"
+  subtitle="Sign in to your account"
+  showRememberMe={true}
+  showForgotPassword={true}
+  showSignUpLink={true}
+  redirectTo="/dashboard"
+/&gt;</code></pre>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- Data Display Components -->
+        <section id="data-components">
+          <h2 class="section-title">Data Display Components</h2>
+          
+          <!-- Stats Card -->
+          <div class="component-showcase">
+            <div class="component-header">
+              <h3 class="component-title">Stats Card</h3>
+              <button class="copy-button" data-copy="stats-code">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+                Copy Code
+              </button>
+            </div>
+            
+            <div class="component-preview">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <StatsCard
+                  title="Total Users"
+                  value="12,547"
+                  change="+12.5%"
+                  trend="up"
+                  description="vs last month"
+                />
+                <StatsCard
+                  title="Revenue"
+                  value="$45,678"
+                  change="-5.2%"
+                  trend="down"
+                  description="vs last month"
+                />
+              </div>
+            </div>
+            
+            <div class="component-code">
+              <pre id="stats-code" class="code-block"><code>&lt;StatsCard
+  title="Total Users"
+  value="12,547"
+  change="+12.5%"
+  trend="up"
+  description="vs last month"
+/&gt;</code></pre>
+            </div>
+          </div>
+
+          <!-- Server Status Card -->
+          <div class="component-showcase">
+            <div class="component-header">
+              <h3 class="component-title">Server Status Card</h3>
+              <button class="copy-button" data-copy="server-code">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+                Copy Code
+              </button>
+            </div>
+            
+            <div class="component-preview">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <ServerStatusCard
+                  name="Production"
+                  status="online"
+                  uptime="99.9%"
+                  lastCheck="2 minutes ago"
+                />
+                <ServerStatusCard
+                  name="Staging"
+                  status="warning"
+                  uptime="95.2%"
+                  lastCheck="1 hour ago"
+                />
+                <ServerStatusCard
+                  name="Development"
+                  status="offline"
+                  uptime="0%"
+                  lastCheck="5 hours ago"
+                />
+              </div>
+            </div>
+            
+            <div class="component-code">
+              <pre id="server-code" class="code-block"><code>&lt;ServerStatusCard
+  name="Production"
+  status="online"
+  uptime="99.9%"
+  lastCheck="2 minutes ago"
+/&gt;</code></pre>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- Feedback Components -->
+        <section id="feedback-components">
+          <h2 class="section-title">Feedback Components</h2>
+          
+          <!-- Alert Card -->
+          <div class="component-showcase">
+            <div class="component-header">
+              <h3 class="component-title">Alert Card</h3>
+              <button class="copy-button" data-copy="alert-code">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+                Copy Code
+              </button>
+            </div>
+            
+            <div class="component-preview">
+              <div class="space-y-4">
+                <AlertCard
+                  type="success"
+                  title="Success!"
+                  message="Your changes have been saved successfully."
+                />
+                <AlertCard
+                  type="warning"
+                  title="Warning"
+                  message="Please review your settings before continuing."
+                />
+                <AlertCard
+                  type="error"
+                  title="Error"
+                  message="Something went wrong. Please try again."
+                />
+                <AlertCard
+                  type="info"
+                  title="Information"
+                  message="New features are available in the latest update."
+                />
+              </div>
+            </div>
+            
+            <div class="component-code">
+              <pre id="alert-code" class="code-block"><code>&lt;AlertCard
+  type="success"
+  title="Success!"
+  message="Your changes have been saved successfully."
+/&gt;
+
+&lt;AlertCard
+  type="warning"
+  title="Warning"
+  message="Please review your settings."
+/&gt;</code></pre>
+            </div>
+          </div>
+
+          <!-- Notification Bell -->
+          <div class="component-showcase">
+            <div class="component-header">
+              <h3 class="component-title">Notification Bell</h3>
+              <button class="copy-button" data-copy="notification-code">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+                Copy Code
+              </button>
+            </div>
+            
+            <div class="component-preview">
+              <div class="flex items-center gap-4">
+                <NotificationBell count={5} />
+                <NotificationBell count={0} />
+                <NotificationBell count={99} />
+              </div>
+            </div>
+            
+            <div class="component-code">
+              <pre id="notification-code" class="code-block"><code>&lt;NotificationBell count={5} /&gt;
+&lt;NotificationBell count={0} /&gt;
+&lt;NotificationBell count={99} /&gt;</code></pre>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- Layout Components -->
+        <section id="layout-components">
+          <h2 class="section-title">Layout Components</h2>
+          
+          <!-- Toggle Switch -->
+          <div class="component-showcase">
+            <div class="component-header">
+              <h3 class="component-title">Toggle Switch</h3>
+              <button class="copy-button" data-copy="toggle-code">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+                Copy Code
+              </button>
+            </div>
+            
+            <div class="component-preview">
+              <div class="space-y-4">
+                <ToggleSwitch
+                  id="notifications"
+                  label="Enable Notifications"
+                  checked={true}
+                />
+                <ToggleSwitch
+                  id="dark-mode"
+                  label="Dark Mode"
+                  checked={false}
+                />
+              </div>
+            </div>
+            
+            <div class="component-code">
+              <pre id="toggle-code" class="code-block"><code>&lt;ToggleSwitch
+  id="notifications"
+  label="Enable Notifications"
+  checked={true}
+/&gt;</code></pre>
+            </div>
+          </div>
+
+          <!-- Dark Mode Toggle -->
+          <div class="component-showcase">
+            <div class="component-header">
+              <h3 class="component-title">Dark Mode Toggle</h3>
+              <button class="copy-button" data-copy="darkmode-code">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+                Copy Code
+              </button>
+            </div>
+            
+            <div class="component-preview">
+              <DarkModeToggle />
+            </div>
+            
+            <div class="component-code">
+              <pre id="darkmode-code" class="code-block"><code>&lt;DarkModeToggle /&gt;</code></pre>
+            </div>
+          </div>
+
+          <!-- Card Skeleton -->
+          <div class="component-showcase">
+            <div class="component-header">
+              <h3 class="component-title">Card Skeleton</h3>
+              <button class="copy-button" data-copy="skeleton-code">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+                Copy Code
+              </button>
+            </div>
+            
+            <div class="component-preview">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <CardSkeleton rows={3} showHeader={true} />
+                <CardSkeleton rows={2} showHeader={false} showFooter={true} />
+              </div>
+            </div>
+            
+            <div class="component-code">
+              <pre id="skeleton-code" class="code-block"><code>&lt;CardSkeleton rows={3} showHeader={true} /&gt;
+&lt;CardSkeleton rows={2} showHeader={false} showFooter={true} /&gt;</code></pre>
+            </div>
+          </div>
+
+        </section>
+
+      </div>
+    </div>
+  </DashboardLayout>
+</Layout>
+
+<style>
+  .nav-link {
+    @apply px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 rounded-md transition-colors;
+  }
+
+  .section-title {
+    @apply text-2xl font-bold mb-8 text-gradient;
+  }
+
+  .component-showcase {
+    @apply bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden mb-8;
+  }
+
+  .component-header {
+    @apply flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700;
+  }
+
+  .component-title {
+    @apply text-lg font-semibold text-gray-900 dark:text-gray-100;
+  }
+
+  .copy-button {
+    @apply flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-md transition-colors;
+  }
+
+  .copy-button.copied {
+    @apply text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20;
+  }
+
+  .component-preview {
+    @apply p-6 bg-gray-50 dark:bg-gray-900/50;
+  }
+
+  .component-code {
+    @apply p-6;
+  }
+
+  .code-block {
+    @apply bg-gray-900 text-gray-100 rounded-lg p-4 overflow-x-auto text-sm;
+  }
+
+  .code-block code {
+    @apply font-mono;
+  }
+</style>
+
+<script>
+  // Copy to clipboard functionality
+  document.addEventListener('click', async (e) => {
+    const button = e.target.closest('[data-copy]');
+    if (!button) return;
+
+    const codeId = button.getAttribute('data-copy');
+    const codeElement = document.getElementById(codeId);
+    
+    if (codeElement) {
+      try {
+        const code = codeElement.textContent;
+        await navigator.clipboard.writeText(code);
+        
+        // Visual feedback
+        button.classList.add('copied');
+        button.innerHTML = `
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          Copied!
+        `;
+        
+        // Reset after 2 seconds
+        setTimeout(() => {
+          button.classList.remove('copied');
+          button.innerHTML = `
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+            </svg>
+            Copy Code
+          `;
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy:', err);
+        // Fallback for older browsers
+        const textarea = document.createElement('textarea');
+        textarea.value = codeElement.textContent;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        
+        button.textContent = 'Copied!';
+        setTimeout(() => {
+          button.textContent = 'Copy Code';
+        }, 2000);
+      }
+    }
+  });
+
+  // Smooth scrolling for navigation
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+</script> 

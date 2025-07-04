@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="en" class="scroll-smooth" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.11.0"><title>Astro Basics</title><link rel="stylesheet" href="/_astro/advanced.VAWlwkOf.css"></head> <body data-astro-cid-sckkx6r4>  <html lang="en" class="scroll-smooth" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.11.0"><title>Astro Basics</title></head> <body data-astro-cid-sckkx6r4>  <div class="flex h-screen bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-gray-900 dark:to-emerald-900" data-astro-cid-kqx5um5x> <!-- Mobile Menu Overlay --> <div id="mobile-overlay" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40 lg:hidden hidden transition-opacity duration-300" data-astro-cid-kqx5um5x></div> <!-- Sidebar --> <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 z-50 w-64 bg-gradient-to-b from-slate-800 via-slate-900 to-emerald-900 text-white transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out shadow-2xl" data-astro-cid-kqx5um5x> <div class="flex flex-col h-full" data-astro-cid-kqx5um5x> <!-- Header --> <div class="flex items-center justify-between p-4 border-b border-slate-700/50" data-astro-cid-kqx5um5x> <div class="flex items-center" data-astro-cid-kqx5um5x> <div class="bg-gradient-to-br from-emerald-400 to-teal-500 w-10 h-10 rounded-xl flex items-center justify-center mr-3 shadow-lg" data-astro-cid-kqx5um5x> <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" data-astro-cid-kqx5um5x> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" data-astro-cid-kqx5um5x></path> </svg> </div> <div data-astro-cid-kqx5um5x> <h1 class="text-lg font-bold bg-gradient-to-r from-emerald-300 to-teal-300 bg-clip-text text-transparent" data-astro-cid-kqx5um5x>DevOps</h1> <p class="text-xs text-slate-400" data-astro-cid-kqx5um5x>Command Center</p> </div> </div> <!-- Close button for mobile --> <button id="close-sidebar" class="lg:hidden p-2 rounded-lg hover:bg-slate-700/50 transition-colors duration-200" data-astro-cid-kqx5um5x> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-kqx5um5x> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" data-astro-cid-kqx5um5x></path> </svg> </button> </div> <!-- Navigation --> <nav class="flex-1 p-4 space-y-2 overflow-y-auto" data-astro-cid-kqx5um5x> <a href="#" class="flex items-center p-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg transform transition-all duration-200 hover:scale-105" data-astro-cid-kqx5um5x> <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor" data-astro-cid-kqx5um5x> <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" data-astro-cid-kqx5um5x></path> </svg> <span class="font-medium" data-astro-cid-kqx5um5x>Dashboard</span> </a> <a href="#" class="flex items-center p-3 rounded-xl hover:bg-gradient-to-r hover:from-emerald-600/20 hover:to-teal-600/20 text-slate-300 hover:text-white transition-all duration-200 group" data-astro-cid-kqx5um5x> <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 group-hover:text-emerald-400" viewBox="0 0 20 20" fill="currentColor" data-astro-cid-kqx5um5x> <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" data-astro-cid-kqx5um5x></path> <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" data-astro-cid-kqx5um5x></path> </svg> <span class="font-medium" data-astro-cid-kqx5um5x>Analytics</span> </a> <a href="#" class="flex items-center p-3 rounded-xl hover:bg-gradient-to-r hover:from-emerald-600/20 hover:to-teal-600/20 text-slate-300 hover:text-white transition-all duration-200 group" data-astro-cid-kqx5um5x> <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 group-hover:text-emerald-400" viewBox="0 0 20 20" fill="currentColor" data-astro-cid-kqx5um5x> <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" data-astro-cid-kqx5um5x></path> </svg> <span class="font-medium" data-astro-cid-kqx5um5x>Services</span> <span class="ml-auto bg-emerald-500 text-white text-xs px-2 py-1 rounded-full" data-astro-cid-kqx5um5x>28</span> </a> <a href="#" class="flex items-center p-3 rounded-xl hover:bg-gradient-to-r hover:from-emerald-600/20 hover:to-teal-600/20 text-slate-300 hover:text-white transition-all duration-200 group" data-astro-cid-kqx5um5x> <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 group-hover:text-emerald-400" viewBox="0 0 20 20" fill="currentColor" data-astro-cid-kqx5um5x> <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" data-astro-cid-kqx5um5x></path> </svg> <span class="font-medium" data-astro-cid-kqx5um5x>Deployments</span> </a> <a href="#" class="flex items-center p-3 rounded-xl hover:bg-gradient-to-r hover:from-emerald-600/20 hover:to-teal-600/20 text-slate-300 hover:text-white transition-all duration-200 group" data-astro-cid-kqx5um5x> <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 group-hover:text-emerald-400" viewBox="0 0 20 20" fill="currentColor" data-astro-cid-kqx5um5x> <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" data-astro-cid-kqx5um5x></path> </svg> <span class="font-medium" data-astro-cid-kqx5um5x>Logs</span> </a> <a href="#" class="flex items-center p-3 rounded-xl hover:bg-gradient-to-r hover:from-emerald-600/20 hover:to-teal-600/20 text-slate-300 hover:text-white transition-all duration-200 group" data-astro-cid-kqx5um5x> <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 group-hover:text-emerald-400" viewBox="0 0 20 20" fill="currentColor" data-astro-cid-kqx5um5x> <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" data-astro-cid-kqx5um5x></path> </svg> <span class="font-medium" data-astro-cid-kqx5um5x>Settings</span> </a> </nav> <!-- Footer --> <div class="p-4 border-t border-slate-700/50" data-astro-cid-kqx5um5x> <div class="flex items-center space-x-3 p-3 rounded-xl bg-gradient-to-r from-emerald-900/50 to-teal-900/50 border border-emerald-700/30" data-astro-cid-kqx5um5x> <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center" data-astro-cid-kqx5um5x> <span class="text-white text-sm font-semibold" data-astro-cid-kqx5um5x>JD</span> </div> <div class="flex-1 min-w-0" data-astro-cid-kqx5um5x> <p class="text-sm font-medium text-white truncate" data-astro-cid-kqx5um5x>John Doe</p> <p class="text-xs text-slate-400 truncate" data-astro-cid-kqx5um5x>Admin</p> </div> <button class="p-1 rounded-lg hover:bg-slate-700/50 transition-colors duration-200" data-astro-cid-kqx5um5x> <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-kqx5um5x> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" data-astro-cid-kqx5um5x></path> </svg> </button> </div> </div> </div> </aside> <!-- Main Content --> <div class="flex-1 flex flex-col min-w-0" data-astro-cid-kqx5um5x> <!-- Mobile Header --> <header class="lg:hidden bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 px-4 py-3" data-astro-cid-kqx5um5x> <div class="flex items-center justify-between" data-astro-cid-kqx5um5x> <button id="mobile-menu-btn" class="p-2 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200" data-astro-cid-kqx5um5x> <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-kqx5um5x> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" data-astro-cid-kqx5um5x></path> </svg> </button> <div class="flex items-center" data-astro-cid-kqx5um5x> <div class="bg-gradient-to-br from-emerald-400 to-teal-500 w-8 h-8 rounded-lg flex items-center justify-center mr-2 shadow-md" data-astro-cid-kqx5um5x> <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" data-astro-cid-kqx5um5x> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" data-astro-cid-kqx5um5x></path> </svg> </div> <span class="text-lg font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent" data-astro-cid-kqx5um5x>DevOps</span> </div> <div class="w-10" data-astro-cid-kqx5um5x></div> <!-- Spacer for centering --> </div> </header> <!-- Main Content Area --> <main class="flex-1 p-4 lg:p-6 overflow-auto bg-gradient-to-br from-emerald-50/50 to-teal-50/50 dark:from-gray-900 dark:to-emerald-900/20" data-astro-cid-kqx5um5x>  <div class="container-padding"> <!-- Page Header --> <div class="page-header"> <h1 class="page-title">Component Library Demo</h1> <p class="page-subtitle">Explore all available components and patterns</p> </div> <!-- Component Showcase --> <div class="space-y-12"> <!-- Buttons Section --> <section> <h2 class="text-xl font-semibold mb-6 text-gradient">Buttons</h2> <div class="grid-responsive"> <div class="card p-6">  <h3 class="font-medium mb-4">Button Variants</h3> <div class="space-y-3"> <button class="btn btn-primary px-4 py-2 text-sm inline-flex items-center" type="button">Primary Button </button> <button class="btn btn-secondary px-4 py-2 text-sm inline-flex items-center" type="button">Secondary Button </button> <button class="btn btn-danger px-4 py-2 text-sm inline-flex items-center" type="button">Danger Button </button> <button class="btn btn-ghost px-4 py-2 text-sm inline-flex items-center" type="button">Ghost Button </button> <button class="inline-flex items-center transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center" type="button">Link Button </button> </div>  </div> <div class="card p-6">  <h3 class="font-medium mb-4">Button Sizes</h3> <div class="space-y-3"> <button class="btn btn-primary px-3 py-1.5 text-sm inline-flex items-center" type="button">Small </button> <button class="btn btn-primary px-4 py-2 text-sm inline-flex items-center" type="button">Medium </button> <button class="btn btn-primary px-6 py-3 text-base inline-flex items-center" type="button">Large </button> <button class="btn btn-primary px-8 py-4 text-lg inline-flex items-center" type="button">Extra Large </button> </div>  </div> <div class="card p-6">  <h3 class="font-medium mb-4">Button States</h3> <div class="space-y-3"> <button class="btn btn-primary px-4 py-2 text-sm inline-flex items-center" type="button" disabled><svg class="animate-spin -ml-1 mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24"> <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle> <path class="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path> </svg>Loading... </button> <button class="btn btn-primary px-4 py-2 text-sm inline-flex items-center" type="button" disabled>Disabled </button> <button class="btn btn-primary px-4 py-2 text-sm w-full justify-center" type="button">Full Width </button> <button class="btn btn-primary px-4 py-2 text-sm inline-flex items-center" type="button"><span class="mr-2"><svg class='w-4 h-4' fill='currentColor' viewBox='0 0 20 20'><path d='M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z'/></svg></span>
+With Icon
+ </button> </div>  </div> </div> </section> <!-- Cards Section --> <section> <h2 class="text-xl font-semibold mb-6 text-gradient">Cards</h2> <div class="grid-responsive"> <div class="card p-6">  <h3 class="font-semibold mb-2">Default Card</h3> <p class="text-gray-600 dark:text-gray-400">
+This is a standard card component with default styling.
+</p>  </div> <div class="card-hover p-6">  <h3 class="font-semibold mb-2">Hover Card</h3> <p class="text-gray-600 dark:text-gray-400">
+This card has interactive hover effects. Try hovering over it!
+</p>  </div> <div class="card card-gradient p-6">  <h3 class="font-semibold mb-2">Gradient Card</h3> <p class="text-gray-600 dark:text-gray-400">
+Beautiful gradient background for special content.
+</p>  </div> <div class="card p-8">  <h3 class="font-semibold mb-2">Large Padding</h3> <p class="text-gray-600 dark:text-gray-400">
+This card uses large padding for more spacious content.
+</p>  </div> </div> </section> <!-- Badges Section --> <section> <h2 class="text-xl font-semibold mb-6 text-gradient">Badges</h2> <div class="card p-6">  <h3 class="font-medium mb-4">Badge Variants</h3> <div class="flex flex-wrap gap-2 mb-6"> <span class="badge-success badge px-2.5 py-0.5 text-xs"> Success </span> <span class="badge-warning badge px-2.5 py-0.5 text-xs"> Warning </span> <span class="badge-error badge px-2.5 py-0.5 text-xs"> Error </span> <span class="badge-info badge px-2.5 py-0.5 text-xs"> Info </span> <span class="badge bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400 px-2.5 py-0.5 text-xs"> Default </span> </div> <h3 class="font-medium mb-4">Badge Sizes</h3> <div class="flex flex-wrap gap-2"> <span class="badge-success badge px-2 py-0.5 text-xs"> Small </span> <span class="badge-success badge px-2.5 py-0.5 text-xs"> Medium </span> <span class="badge-success badge px-3 py-1 text-sm"> Large </span> </div>  </div> </section> <!-- Forms Section --> <section> <h2 class="text-xl font-semibold mb-6 text-gradient">Forms</h2> <div class="grid grid-cols-1 lg:grid-cols-2 gap-6"> <div class="card p-6">  <h3 class="font-medium mb-4">Input Components</h3> <form class="space-y-4"> <div class="form-group"> <label for="name" class="form-label"> Full Name <span class="text-red-500 ml-1">*</span> </label> <input type="text" id="name" name="name" placeholder="Enter your full name" required class="form-input">  </div> <div class="form-group"> <label for="email" class="form-label"> Email Address <span class="text-red-500 ml-1">*</span> </label> <input type="email" id="email" name="email" placeholder="Enter your email" required class="form-input">  </div> <div class="form-group"> <label for="password" class="form-label"> Password <span class="text-red-500 ml-1">*</span> </label> <input type="password" id="password" name="password" placeholder="Enter your password" required class="form-input">  </div> <div class="form-group"> <label for="error-example" class="form-label"> Input with Error  </label> <input type="text" id="error-example" name="error-example" placeholder="This field has an error" class="form-input border-red-500 focus:ring-red-500"> <p class="form-error"> This field is required </p> </div> <button class="btn btn-primary px-4 py-2 text-sm w-full justify-center" type="submit">
+Submit Form
+ </button> </form>  </div> <div class="card p-6">  <h3 class="font-medium mb-4">Global Form Styles</h3> <form class="space-y-4"> <div class="form-group"> <label class="form-label">Using Global Classes</label> <input type="text" class="form-input" placeholder="Input with global classes"> </div> <div class="form-group"> <label class="form-label">Select Dropdown</label> <select class="form-input"> <option>Option 1</option> <option>Option 2</option> <option>Option 3</option> </select> </div> <div class="form-group"> <label class="form-label">Textarea</label> <textarea class="form-input" rows="3" placeholder="Enter your message"></textarea> </div> <button class="btn-primary w-full" type="submit">
+Submit with Global Classes
+</button> </form>  </div> </div> </section> <!-- Authentication Section --> <section> <h2 class="text-xl font-semibold mb-6 text-gradient">Authentication</h2> <div class="max-w-md mx-auto"> <div class="card card-gradient p-6 w-full max-w-md ">  <div class="text-center mb-6"> <h2 class="text-2xl font-bold text-gradient">Demo Login</h2> <p class="text-gray-600 dark:text-gray-400 mt-2">Try demo@example.com / demo123</p> </div> <form id="login-form" class="space-y-4"> <div class="form-group"> <label for="email" class="form-label"> Email address <span class="text-red-500 ml-1">*</span> </label> <input type="email" id="email" name="email" placeholder="Enter your email" required autocomplete="email" class="form-input">  </div> <div class="form-group"> <label for="password" class="form-label"> Password <span class="text-red-500 ml-1">*</span> </label> <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password" class="form-input">  </div> <div class="flex items-center"> <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded"> <label for="remember-me" class="ml-2 block text-sm text-gray-700 dark:text-gray-300">
+Remember me
+</label> </div> <button class="btn btn-primary px-6 py-3 text-base w-full justify-center" type="submit" id="login-button">
+Sign in
+ </button> <div class="text-center space-y-2"> <p> <a href="/auth/forgot-password" class="text-sm text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 hover:underline">
+Forgot your password?
+</a> </p> <p class="text-sm text-gray-600 dark:text-gray-400">
+Don't have an account?
+<a href="/auth/register" class="font-medium text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 hover:underline ml-1">
+Sign up
+</a> </p> </div> </form>  <div id="error-message" class="hidden mt-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg"> <p class="text-sm text-red-600 dark:text-red-400" id="error-text"></p> </div>  <div id="success-message" class="hidden mt-4 p-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg"> <p class="text-sm text-green-600 dark:text-green-400" id="success-text"></p> </div>  </div> <script>(function(){const redirectTo = "/demo";
+
+  class LoginForm {
+    constructor() {
+      this.form = document.getElementById('login-form');
+      this.button = document.getElementById('login-button');
+      this.errorContainer = document.getElementById('error-message');
+      this.errorText = document.getElementById('error-text');
+      this.successContainer = document.getElementById('success-message');
+      this.successText = document.getElementById('success-text');
+      
+      this.init();
+    }
+
+    init() {
+      if (this.form) {
+        this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+      }
+    }
+
+    async handleSubmit(e) {
+      e.preventDefault();
+      
+      this.hideMessages();
+      this.setLoading(true);
+
+      const formData = new FormData(this.form);
+      const email = formData.get('email');
+      const password = formData.get('password');
+      const rememberMe = formData.get('remember-me') === 'on';
+
+      try {
+        // Simulated API call - replace with your actual authentication logic
+        const response = await this.authenticateUser({ email, password, rememberMe });
+        
+        if (response.success) {
+          this.showSuccess('Login successful! Redirecting...');
+          
+          // Store auth token if provided
+          if (response.token) {
+            localStorage.setItem('authToken', response.token);
+          }
+          
+          // Redirect after short delay
+          setTimeout(() => {
+            window.location.href = redirectTo;
+          }, 1500);
+        } else {
+          this.showError(response.message || 'Login failed. Please try again.');
+        }
+      } catch (error) {
+        this.showError('An error occurred. Please try again.');
+        console.error('Login error:', error);
+      } finally {
+        this.setLoading(false);
+      }
+    }
+
+    // Simulated authentication - replace with your actual API
+    async authenticateUser({ email, password, rememberMe }) {
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Simulate authentication logic
+      if (email === 'demo@example.com' && password === 'demo123') {
+        return {
+          success: true,
+          token: 'demo-jwt-token',
+          user: { email, name: 'Demo User' }
+        };
+      } else {
+        return {
+          success: false,
+          message: 'Invalid email or password'
+        };
+      }
+    }
+
+    setLoading(loading) {
+      if (this.button) {
+        this.button.disabled = loading;
+        this.button.innerHTML = loading 
+          ? '<svg class="animate-spin -ml-1 mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Signing in...'
+          : 'Sign in';
+      }
+    }
+
+    showError(message) {
+      if (this.errorText && this.errorContainer) {
+        this.errorText.textContent = message;
+        this.errorContainer.classList.remove('hidden');
+      }
+    }
+
+    showSuccess(message) {
+      if (this.successText && this.successContainer) {
+        this.successText.textContent = message;
+        this.successContainer.classList.remove('hidden');
+      }
+    }
+
+    hideMessages() {
+      if (this.errorContainer) this.errorContainer.classList.add('hidden');
+      if (this.successContainer) this.successContainer.classList.add('hidden');
+    }
+  }
+
+  // Initialize login form
+  document.addEventListener('DOMContentLoaded', () => {
+    new LoginForm();
+  });
+})();</script> </div> </section> <!-- Loading States Section --> <section> <h2 class="text-xl font-semibold mb-6 text-gradient">Loading States</h2> <div class="grid-responsive"> <div class="card p-6 animate-pulse "> <div class="flex items-center space-x-4 mb-4"> <div class="skeleton w-12 h-12 rounded-full"></div> <div class="flex-1 space-y-2"> <div class="skeleton h-4 w-3/4"></div> <div class="skeleton h-3 w-1/2"></div> </div> </div> <div class="space-y-3"> <div class="space-y-2"> <div class="skeleton h-4 w-full"></div> <div class="skeleton h-4 w-5/6"></div> </div><div class="space-y-2"> <div class="skeleton h-4 w-full"></div> <div class="skeleton h-4 w-5/6"></div> </div> </div>  </div> <div class="card p-6 animate-pulse ">  <div class="space-y-3"> <div class="space-y-2"> <div class="skeleton h-4 w-full"></div> <div class="skeleton h-4 w-5/6"></div> </div><div class="space-y-2"> <div class="skeleton h-4 w-full"></div> <div class="skeleton h-4 w-5/6"></div> </div><div class="space-y-2"> <div class="skeleton h-4 w-full"></div> <div class="skeleton h-4 w-5/6"></div> </div> </div> <div class="flex items-center justify-between mt-6 pt-4 border-t border-gray-200 dark:border-gray-700"> <div class="skeleton h-8 w-20"></div> <div class="skeleton h-8 w-16"></div> </div> </div> <div class="card p-6 animate-pulse "> <div class="flex items-center space-x-4 mb-4"> <div class="skeleton w-12 h-12 rounded-full"></div> <div class="flex-1 space-y-2"> <div class="skeleton h-4 w-3/4"></div> <div class="skeleton h-3 w-1/2"></div> </div> </div> <div class="space-y-3"> <div class="space-y-2"> <div class="skeleton h-4 w-full"></div> <div class="skeleton h-4 w-5/6"></div> </div> </div> <div class="flex items-center justify-between mt-6 pt-4 border-t border-gray-200 dark:border-gray-700"> <div class="skeleton h-8 w-20"></div> <div class="skeleton h-8 w-16"></div> </div> </div> <div class="card p-6">  <h3 class="font-medium mb-4">Loading Utilities</h3> <div class="space-y-4"> <div class="flex items-center space-x-2"> <div class="loading-spinner w-4 h-4"></div> <span>Loading spinner</span> </div> <div class="space-y-2"> <div class="skeleton h-4 w-full"></div> <div class="skeleton h-4 w-3/4"></div> <div class="skeleton h-4 w-1/2"></div> </div> </div>  </div> </div> </section> <!-- Status Indicators --> <section> <h2 class="text-xl font-semibold mb-6 text-gradient">Status Indicators</h2> <div class="card p-6">  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4"> <div class="flex items-center space-x-2"> <div class="status-online"></div> <span>Online</span> </div> <div class="flex items-center space-x-2"> <div class="status-warning"></div> <span>Warning</span> </div> <div class="flex items-center space-x-2"> <div class="status-offline"></div> <span>Offline</span> </div> </div>  </div> </section> <!-- Layout Utilities --> <section> <h2 class="text-xl font-semibold mb-6 text-gradient">Layout Utilities</h2> <div class="card p-6 mb-6">  <h3 class="font-medium mb-4">Responsive Grid</h3> <div class="grid-responsive"> <div class="bg-emerald-100 dark:bg-emerald-900/20 p-4 rounded-lg text-center">
+Item 1
+</div> <div class="bg-emerald-100 dark:bg-emerald-900/20 p-4 rounded-lg text-center">
+Item 2
+</div> <div class="bg-emerald-100 dark:bg-emerald-900/20 p-4 rounded-lg text-center">
+Item 3
+</div> <div class="bg-emerald-100 dark:bg-emerald-900/20 p-4 rounded-lg text-center">
+Item 4
+</div> </div>  </div> <div class="card p-6">  <h3 class="font-medium mb-4">Stats Grid</h3> <div class="grid-stats"> <div class="bg-blue-100 dark:bg-blue-900/20 p-4 rounded-lg text-center">
+Stat 1
+</div> <div class="bg-blue-100 dark:bg-blue-900/20 p-4 rounded-lg text-center">
+Stat 2
+</div> <div class="bg-blue-100 dark:bg-blue-900/20 p-4 rounded-lg text-center">
+Stat 3
+</div> <div class="bg-blue-100 dark:bg-blue-900/20 p-4 rounded-lg text-center">
+Stat 4
+</div> </div>  </div> </section> <!-- Modal Demo --> <section> <h2 class="text-xl font-semibold mb-6 text-gradient">Modal</h2> <div class="card p-6">  <h3 class="font-medium mb-4">Modal Component</h3> <button class="btn btn-primary px-4 py-2 text-sm inline-flex items-center" type="button" data-action="open-modal" data-target="demo-modal">
+Open Modal
+ </button>  </div> </section> </div> </div>  <div id="demo-modal" class="modal-overlay hidden" data-modal-overlay="true"> <div class="modal-content max-w-md" data-modal-content="true"> <div class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700"> <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
+Demo Modal
+</h3> <button type="button" class="btn-ghost p-2 rounded-lg" data-modal-close="true" aria-label="Close modal"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path> </svg> </button> </div> <div class="p-6"> <p class="mb-4">
+This is a demo modal component. It supports various sizes, backdrop clicking to close, 
+        and can contain any content you need.
+</p> <div class="space-y-3"> <div class="form-group"> <label for="7d1c8812-1f0b-484e-bf6b-3b251f9d3c6f" class="form-label"> Modal Input  </label> <input type="text" id="7d1c8812-1f0b-484e-bf6b-3b251f9d3c6f" placeholder="Try typing something" class="form-input">  </div> <div class="flex space-x-2"> <span class="badge-info badge px-2.5 py-0.5 text-xs"> Modal Content </span> <span class="badge-success badge px-2.5 py-0.5 text-xs"> Interactive </span> </div> </div> </div> <div class="flex justify-end space-x-3 p-6 border-t border-gray-200 dark:border-gray-700"> <button class="btn-ghost" data-modal-close="true">
+Cancel
+</button> <button class="btn-primary" data-modal-close="true">
+Save Changes
+</button> </div> </div> </div>  </main> </div> </div>  </body></html> <script type="module">class d{constructor(){this.isOpen=!1,this.sidebar=document.getElementById("sidebar"),this.overlay=document.getElementById("mobile-overlay"),this.mobileMenuBtn=document.getElementById("mobile-menu-btn"),this.closeSidebarBtn=document.getElementById("close-sidebar"),this.init()}init(){this.mobileMenuBtn?.addEventListener("click",()=>this.toggleSidebar()),this.closeSidebarBtn?.addEventListener("click",()=>this.closeSidebar()),this.overlay?.addEventListener("click",()=>this.closeSidebar()),document.addEventListener("keydown",t=>{t.key==="Escape"&&this.isOpen&&this.closeSidebar()}),window.addEventListener("resize",()=>{window.innerWidth>=1024&&this.closeSidebar()}),this.setupTouchGestures()}toggleSidebar(){this.isOpen?this.closeSidebar():this.openSidebar()}openSidebar(){this.sidebar?.classList.remove("-translate-x-full"),this.sidebar?.classList.add("translate-x-0"),this.overlay?.classList.remove("hidden"),this.overlay?.classList.add("opacity-100"),document.body.style.overflow="hidden",this.isOpen=!0}closeSidebar(){this.sidebar?.classList.add("-translate-x-full"),this.sidebar?.classList.remove("translate-x-0"),this.overlay?.classList.add("hidden"),this.overlay?.classList.remove("opacity-100"),document.body.style.overflow="",this.isOpen=!1}setupTouchGestures(){let t=0,i=0,s=!1;document.addEventListener("touchstart",e=>{t=e.touches[0].clientX,s=!0}),document.addEventListener("touchmove",e=>{s&&(i=e.touches[0].clientX)}),document.addEventListener("touchend",()=>{if(!s)return;s=!1;const e=i-t;t<50&&e>100&&!this.isOpen&&this.openSidebar(),e<-100&&this.isOpen&&this.closeSidebar()})}}document.addEventListener("DOMContentLoaded",()=>{new d});</script>   </body></html> <script type="module">console.log("Component library demo loaded!");document.addEventListener("click",o=>{const t=o.target;if(t.hasAttribute("data-action")&&t.getAttribute("data-action")==="open-modal"){const d=t.getAttribute("data-target");if(d){const e=document.getElementById(d);e&&(e.classList.remove("hidden"),e.classList.add("flex"),document.body.style.overflow="hidden")}}});</script>

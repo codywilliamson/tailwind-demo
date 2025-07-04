@@ -1,13 +1,27 @@
 {
-  "name": "tailwind-demo",
+  "name": "astro-tailwind-template",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "description": "Modern, production-ready Astro + Tailwind CSS template with component library, authentication patterns, and data handling utilities",
+  "keywords": ["astro", "tailwind", "template", "typescript", "component-library", "authentication", "ui-kit"],
+  "author": "Your Name",
+  "license": "MIT",
+  "homepage": "https://github.com/yourusername/astro-tailwind-template#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/astro-tailwind-template.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/astro-tailwind-template/issues"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "npm run build && echo 'Build complete! Upload the dist folder to Netlify or run: netlify deploy --prod --dir=dist'"
+    "deploy": "npm run build && echo 'Build complete! Upload the dist folder to Netlify or run: netlify deploy --prod --dir=dist'",
+    "check": "astro check",
+    "lint": "astro check"
   },
   "dependencies": {
     "astro": "^5.6.1",
@@ -16,6 +30,10 @@
   "devDependencies": {
     "tailwindcss": "^3.4.0",
     "autoprefixer": "^10.4.21",
-    "postcss": "^8.5.3"
+    "postcss": "^8.5.3",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

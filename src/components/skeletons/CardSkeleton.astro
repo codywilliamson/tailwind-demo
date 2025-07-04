@@ -1,0 +1,43 @@
+---
+export interface Props {
+  rows?: number;
+  showHeader?: boolean;
+  showFooter?: boolean;
+  class?: string;
+}
+
+const { 
+  rows = 3,
+  showHeader = true,
+  showFooter = false,
+  class: className = ''
+} = Astro.props;
+---
+
+<div class={`card p-6 animate-pulse ${className}`}>
+  {showHeader && (
+    <div class="flex items-center space-x-4 mb-4">
+      <div class="skeleton w-12 h-12 rounded-full"></div>
+      <div class="flex-1 space-y-2">
+        <div class="skeleton h-4 w-3/4"></div>
+        <div class="skeleton h-3 w-1/2"></div>
+      </div>
+    </div>
+  )}
+  
+  <div class="space-y-3">
+    {Array.from({ length: rows }, (_, i) => (
+      <div class="space-y-2">
+        <div class="skeleton h-4 w-full"></div>
+        <div class="skeleton h-4 w-5/6"></div>
+      </div>
+    ))}
+  </div>
+  
+  {showFooter && (
+    <div class="flex items-center justify-between mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+      <div class="skeleton h-8 w-20"></div>
+      <div class="skeleton h-8 w-16"></div>
+    </div>
+  )}
+</div>
